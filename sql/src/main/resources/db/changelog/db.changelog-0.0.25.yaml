@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.25"
+      author: boris
+      changes:
+        - createTable:
+            tableName: settlement_transaction
+            remarks: 간병비 정산금의 입출금 내역
+            columns:
+              - column:
+                  name: settlement_id
+                  remarks: 정산 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_type
+                  remarks: 입/출금 구분
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount
+                  remarks: 입/출금 금액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_date
+                  remarks: 입/출금 일자
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: entered_date_time
+                  remarks: 입력 일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transactionSubjectId
+                  remarks: "입/출금을 기입한 관리자(항상 내부 관리자임)"
+                  type: char(26)
+                  constraints:
+                    nullable: false

@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.10"
+      author: boris
+      changes:
+        - addColumn:
+            tableName: coverage
+            columns:
+              - column:
+                  name: last_modified_date_time
+                  remarks: "마지막 데이터 수정일시"
+                  type: datetime
+                  constraints:
+                    nullable: true
+        - update:
+            tableName: coverage
+            columns:
+              - column:
+                  name: last_modified_date_time
+                  valueComputed: updated_at
+        - addNotNullConstraint:
+            tableName: coverage
+            columnName: last_modified_date_time
+            columnDataType: datetime

@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.137"
+      author: rena
+      changes:
+        - renameColumn:
+            tableName: caregiving_round
+            columnDataType: varchar(200)
+            newColumnName: cancel_reason_detail
+            oldColumnName: caregiving_round_closing_reason_detail
+            remarks: 취소 사유 상세
+        - renameColumn:
+            tableName: caregiving_round
+            columnDataType: varchar(50)
+            newColumnName: closing_reason_type
+            oldColumnName: caregiving_round_closing_reason_type
+            remarks: "간병 회차 종료 사유 타입 ( FINISHED 정상 종료, FINISHED_CONTINUE 계속건 추가, FINISHED_RESTARTING 중단계속, FINISHED_USING_PERSONAL_CAREGIVER 개인구인으로 종료, CANCELED_WHILE_REMATCHING 리매칭 중 취소, CANCELED_USING_PERSONAL_CAREGIVER 개인 구인 간병인 이용예정)"

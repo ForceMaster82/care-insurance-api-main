@@ -1,0 +1,3 @@
+package kr.caredoc.careinsurance.web.agency.response
+
+data class EnteredExternalCaregivingOrganizationIdNotRegisteredData(val enteredExternalCaregivingOrganizationId: String)

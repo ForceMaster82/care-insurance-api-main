@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.119"
+      author: eddy
+      changes:
+        - createTable:
+            tableName: settlement_revision
+            remarks: 정산 리비젼
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: settlement_id
+                  remarks: 정산 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: progressing_status
+                  remarks: 정산 진행 상태
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_amount
+                  remarks: 정산 금액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_deposit_amount
+                  remarks: 입금 총액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_withdrawal_amount
+                  remarks: 출금 총액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: issued_date_time
+                  remarks: 발생 일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

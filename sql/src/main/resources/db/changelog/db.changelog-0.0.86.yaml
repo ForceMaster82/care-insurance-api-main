@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.86"
+      author: rena
+      changes:
+        - renameColumn:
+            tableName: settlement_transaction
+            columnDataType: char(26)
+            newColumnName: transaction_subject_id
+            oldColumnName: transactionSubjectId
+            remarks: 입/출금을 기입한 관리자(항상 내부 관리자임)
+        - setTableRemarks:
+            remarks: 간병 시작 메시지 발송 요약
+            tableName: caregiving_start_message_summary

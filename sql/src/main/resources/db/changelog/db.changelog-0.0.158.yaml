@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.158"
+      author: boris
+      changes:
+        - dropColumn:
+            tableName: caregiving_progress_message_sending_history
+            columns:
+              - column:
+                  name: reception_id

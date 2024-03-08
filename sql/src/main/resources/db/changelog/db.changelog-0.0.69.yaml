@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.69s"
+      author: rena
+      changes:
+        - createTable:
+            tableName: caregiving_progress_message_sending_history
+            remarks: 간병 진행 메시지 발송 기록
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: caregiving_round_id
+                  remarks: 메시지를 보낸 간병 회차의 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reception_id
+                  remarks: 메시지를 보낸 고객 정보의 접수 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: attempt_date_time
+                  remarks: 발송을 시도한 일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: result
+                  remarks: 발송 결과
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: message_id
+                  remarks: 발송한 메시지의 외부 식별자
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

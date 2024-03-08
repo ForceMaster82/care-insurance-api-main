@@ -1,0 +1,189 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.115"
+      author: boris
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: user_id
+            indexName: idx_internal_caregiving_manager_user_id
+            tableName: internal_caregiving_manager
+            unique: true
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: user_id
+            indexName: idx_external_caregiving_manager_user_id
+            tableName: external_caregiving_manager
+            unique: false
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: url
+            indexName: idx_file_meta_url
+            tableName: file_meta
+            unique: false
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: reception_id
+            indexName: idx_settlement_reception_id
+            tableName: settlement
+            unique: false
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: reception_id
+            indexName: idx_caregiving_round_reception_id
+            tableName: caregiving_round
+            unique: false
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: reception_id
+            indexName: idx_caregiving_charge_modification_summary_reception_id
+            tableName: caregiving_charge_modification_summary
+            unique: true
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: reception_id
+            indexName: idx_caregiving_charge_modification_history_reception_id
+            tableName: caregiving_charge_modification_history
+            unique: false
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: reception_id
+            indexName: idx_reception_modification_history_reception_id
+            tableName: reception_modification_history
+            unique: false
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: reception_id
+            indexName: idx_reception_modification_summary_reception_id
+            tableName: reception_modification_summary
+            unique: true
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: reception_id
+            indexName: idx_caregiving_round_modification_summary_reception_id
+            tableName: caregiving_round_modification_summary
+            unique: true
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: reception_id
+            indexName: idx_caregiving_round_modification_history_reception_id
+            tableName: caregiving_round_modification_history
+            unique: false
+        - createIndex:
+            columns:
+              - column:
+                  descending: true
+                  name: received_date
+            indexName: idx_daily_reception_statistics_received_date
+            tableName: daily_reception_statistics
+            unique: true
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: reception_id
+            indexName: idx_billing_reception_id
+            tableName: billing
+            unique: false
+        - createIndex:
+            columns:
+              - column:
+                  descending: true
+                  name: date
+            indexName: idx_daily_settlement_transaction_statistics_date
+            tableName: daily_settlement_transaction_statistics
+            unique: true
+        - createIndex:
+            columns:
+              - column:
+                  descending: true
+                  name: date
+            indexName: idx_daily_caregiving_settlement_transaction_statistics_date
+            tableName: daily_caregiving_round_settlement_transaction_statistics
+            unique: false
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: organization_id
+            indexName: idx_caregiving_round_organization_id
+            tableName: caregiving_round
+            unique: false
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: caregiving_round_id
+            indexName: idx_caregiving_charge_caregiving_round_id
+            tableName: caregiving_charge
+            unique: true
+        - createIndex:
+            columns:
+              - column:
+                  descending: true
+                  name: date
+            indexName: idx_daily_billing_transaction_statistics_date
+            tableName: daily_billing_transaction_statistics
+            unique: true
+        - createIndex:
+            columns:
+              - column:
+                  descending: true
+                  name: date
+            indexName: idx_daily_caregiving_round_billing_transaction_statistics
+            tableName: daily_caregiving_round_billing_transaction_statistics
+            unique: false
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: email_address
+            indexName: idx_user_email_address
+            tableName: user
+            unique: true
+        - createIndex:
+            columns:
+              - column:
+                  descending: true
+                  name: issued_date
+            indexName: idx_reconciliation_issued_date
+            tableName: reconciliation
+            unique: false
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: settlement_id
+            indexName: idx_settlement_transaction_settlement_id
+            tableName: settlement_transaction
+            unique: false
+        - createIndex:
+            columns:
+              - column:
+                  descending: false
+                  name: billing_id
+            indexName: idx_billing_transaction_settlement_id
+            tableName: billing_transaction_record
+            unique: false

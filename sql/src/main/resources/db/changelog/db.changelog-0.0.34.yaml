@@ -1,0 +1,100 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.33"
+      author: boris
+      changes:
+        - createTable:
+            tableName: reconciliation
+            remarks: 대사 자료
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: reception_id
+                  remarks: 대사할 거래가 발생한 접수 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiving_round_id
+                  remarks: 대사할 거래가 발생한 간병 회차 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: issued_date
+                  remarks: 대사할 거래의 발생일
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: closing_status
+                  remarks: "대사 마감 여부(OPEN: 마감전, CLOSED: 마감)"
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reconciled_year
+                  remarks: 대사 연도
+                  type: int
+                  constraints:
+                    nullable: true
+              - column:
+                  name: reconciled_month
+                  remarks: 대사 월
+                  type: int
+                  constraints:
+                    nullable: true
+              - column:
+                  name: billing_amount
+                  remarks: 청구 금액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: settlement_amount
+                  remarks: 정산 금액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: settlement_deposit_amount
+                  remarks: 정산 입금액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: settlement_withdrawal_amount
+                  remarks: 정산 출금액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: profit
+                  remarks: 거래로 인해 발생한 이익(이익 분배 전)
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: distributed_profit
+                  remarks: 거래로 인해 발생한 이익 중 협회/제휴사로 분배되는 금액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드의 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

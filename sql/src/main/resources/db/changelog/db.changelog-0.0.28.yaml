@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.28"
+      author: boris
+      changes:
+        - dropNotNullConstraint:
+            tableName: external_caregiving_organization
+            columnName: business_license_url
+            columnDataType: varchar(255)

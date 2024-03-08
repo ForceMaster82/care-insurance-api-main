@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.77"
+      author: boris
+      changes:
+        - addColumn:
+            tableName: reception
+            columns:
+              - column:
+                  name: masked_patient_name
+                  remarks: 마스킹된 환자 이름
+                  type: varchar(50)
+                  constraints:
+                    nullable: true

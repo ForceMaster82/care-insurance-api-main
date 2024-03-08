@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.23"
+      author: boris
+      changes:
+        - addColumn:
+            tableName: user
+            columns:
+              - column:
+                  name: hashed_authentication_code
+                  remarks: 임시 인증코드(해싱됨)
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: authentication_code_salt
+                  remarks: 임시 인증코드 암호화 소금
+                  type: char(16)
+                  constraints:
+                    nullable: true

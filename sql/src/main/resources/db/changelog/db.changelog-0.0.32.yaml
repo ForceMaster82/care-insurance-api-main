@@ -1,0 +1,82 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.32"
+      author: boris
+      changes:
+        - createTable:
+            tableName: monthly_reconciliation_statistics
+            remarks: 일자별 간병 접수 통계
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: year
+                  remarks: 통계를 이루는 대사들의 기준연도
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: month
+                  remarks: 통계를 이루는 대사들의 기준월
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reception_count
+                  remarks: 통계를 이루는 대사의 고유한 접수의 수
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiver_count
+                  remarks: 통계를 이루는 대사의 고유한 접수별 고유한 간병인의 수
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_caregiving_period
+                  remarks: 통계를 이루는 대사의 고유한 간병 회차들의 실 간병기간 합계(일단위까지만 표기)
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_billing_amount
+                  remarks: 통계를 이루는 대사들의 간병비 청구금 합계
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_settlement_amount
+                  remarks: 통계를 이루는 대사들의 간병비 정산금 합계
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_sales
+                  remarks: 통계를 이루는 대사들의 정산된 간병비를 제외한 청구금 합계
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_distributed_profit
+                  remarks: 통계를 이루는 대사들의 협회/제휴사 분배금 합계
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드의 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.70"
+      author: boris
+      changes:
+        - createTable:
+            tableName: caregiving_satisfaction_survey_status
+            remarks: 간병 만족도 조사 상태
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: reception_id
+                  remarks: 만족도를 조사할 접수의 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiving_round_id
+                  remarks: 만족도를 조사할 기준 회차 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expected_sending_date
+                  remarks: 만족도 조사 수행 예정일
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reservation_status
+                  remarks: 예약 상태
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

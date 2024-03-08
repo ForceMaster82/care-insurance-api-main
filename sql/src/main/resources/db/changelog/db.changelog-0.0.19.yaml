@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.19"
+      author: boris
+      changes:
+        - addColumn:
+            tableName: reception
+            columns:
+              - column:
+                  name: patient_primary_phone_number_encrypted_part
+                  remarks: 환자 주 연락처의 가려진 부분(암호화됨)
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patient_secondary_phone_number_encrypted_part
+                  remarks: 환자 부 연락처의 가려진 부분(암호화됨)
+                  type: text
+                  constraints:
+                    nullable: false

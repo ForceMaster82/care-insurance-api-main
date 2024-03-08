@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.67"
+      author: boris
+      changes:
+        - dropNotNullConstraint:
+            tableName: reception
+            columnName: patient_secondary_phone_number_encrypted_part
+            columnDataType: text

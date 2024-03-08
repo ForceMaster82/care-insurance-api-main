@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.113"
+      author: rena
+      changes:
+        - createTable:
+            tableName: billing_revision
+            remarks: 청구 리비젼
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: billing_id
+                  remarks: 청구 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: billing_progressing_status
+                  remarks: 청구 진행 상태
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: billing_amount
+                  remarks: 청구 금액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_deposit_amount
+                  remarks: 입금 총액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_withdrawal_amount
+                  remarks: 출금 총액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: issued_date_time
+                  remarks: 발생 일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

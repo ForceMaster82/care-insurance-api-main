@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.107"
+      author: boris
+      changes:
+        - createTable:
+            tableName: personal_data_access_log
+            remarks: 개인 정보 접근 로그
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: revealed_entity_Id
+                  remarks: 접근이 이뤄진 엔티티의 식별자
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: revealing_subject_type
+                  remarks: 접근한 주체 구분
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: revealing_subject_id
+                  remarks: 접근한 주체의 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: revealing_subject_ip
+                  remarks: 접근한 주체의 접근 당시 IP
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: revealed_data
+                  remarks: 접근한 데이터 상세 구분
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: revealed_at
+                  remarks: 접근 일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

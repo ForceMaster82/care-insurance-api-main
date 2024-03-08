@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.128"
+      author: eddy
+      changes:
+        - addColumn:
+            tableName: reception
+            columns:
+              - column:
+                  name: canceled_date_time
+                  type: datetime
+                  afterColumn: reason_for_cancellation
+                  constraints:
+                    nullable: true

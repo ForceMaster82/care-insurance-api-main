@@ -1,0 +1,209 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.16"
+      author: rena
+      changes:
+        - createTable:
+            tableName: caregiving_round
+            remarks: 간병 회차
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: caregiving_round_number
+                  remarks: 간병 회차 번호
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiving_progressing_status
+                  remarks: 간병 진행 상태
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reception_id
+                  remarks: 접수 정보 식별자
+                  type: char(26)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: reception_progressing_status
+                  remarks: 접수 진행 상태
+                  type: varchar(40)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: accident_number
+                  remarks: 사고 번호
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: insurance_number
+                  remarks: 보험 증권 번호
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: patient_name
+                  remarks: 환자 이름
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: expected_caregiving_start_date
+                  remarks: 간병 예상 일자
+                  type: date
+                  constraints:
+                    nullable: true
+              - column:
+                  name: organization_type
+                  remarks: "간병을 관리하는 단체의 구분(INTERNAL: 내부, ORGANIZATION: 협회, AFFILIATED: 제휴사)"
+                  type: varchar(15)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: organization_id
+                  remarks: 간병 관리 단체 아이디(내부의 경우 null)
+                  type: char(26)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: managing_user_id
+                  remarks: 간병을 관리하는 사용자 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: start_date_time
+                  remarks: 간병 시작 일시
+                  type: datetime
+                  constraints:
+                    nullable: true
+              - column:
+                  name: end_date_time
+                  remarks: 간병 종료 일시
+                  type: datetime
+                  constraints:
+                    nullable: true
+              - column:
+                  name: closing_optional_requests
+                  remarks: 종료시 선택적 입력사항
+                  type: varchar(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: cancel_date_time
+                  remarks: 취소 일시
+                  type: datetime
+                  constraints:
+                    nullable: true
+              - column:
+                  name: caregiving_round_closing_reason_type
+                  remarks: "간병 회차 종료 사유 타입 ( FINISHED 정상 종료, CANCELED_REMATCHING 리매칭 중 취소, CANCELED_BY_PERSONAL_CAREGIVER 개인 구인 간병인 이용예정)"
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: caregiving_round_closing_reason_detail
+                  remarks: 사유 상세
+                  type: varchar(200)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: settlement_progressing_status
+                  remarks: 정산 진행 상태
+                  type: varchar(40)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: billing_progressing_status
+                  remarks: 청구 진행 상태
+                  type: varchar(40)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: caregiver_organization_id
+                  remarks: 간병인 소속 식별자
+                  type: char(26)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: caregiver_name
+                  remarks: 간병인 성명
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: caregiver_sex
+                  remarks: "간병인 성별 (MALE 남자, FEMALE 여자)"
+                  type: varchar(10)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: caregiver_birth_date
+                  remarks: 간병인 생년월일
+                  type: date
+                  constraints:
+                    nullable: true
+              - column:
+                  name: caregiver_phone_number
+                  remarks: 간병인 연락처
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: daily_caregiving_charge
+                  remarks: 1일 간병료
+                  type: int
+                  constraints:
+                    nullable: true
+              - column:
+                  name: commission_fee
+                  remarks: 수수료
+                  type: int
+                  constraints:
+                    nullable: true
+              - column:
+                  name: caregiver_insured
+                  remarks: 책임보험 가입 여부 (기본값 = false)
+                  type: boolean
+                  constraints:
+                    nullable: true
+                    default: false
+              - column:
+                  name: bank
+                  remarks: 은행명
+                  type: varchar(20)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: account_holder
+                  remarks: 예금주
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: account_number
+                  remarks: 계좌번호
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드의 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

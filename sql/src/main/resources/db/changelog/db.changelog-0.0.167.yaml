@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.167"
+      author: eddy
+      changes:
+        - dropColumn:
+            tableName: settlement
+            columns:
+              - column:
+                  name: patient_nickname

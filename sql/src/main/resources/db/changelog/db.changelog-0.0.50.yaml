@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.50"
+      author: boris
+      changes:
+        - addColumn:
+            tableName: caregiving_round
+            columns:
+              - column:
+                  name: remarks
+                  type: text
+                  afterColumn: account_number
+                  constraints:
+                    nullable: false

@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.44"
+      author: boris
+      changes:
+        - dropTable:
+            tableName: monthly_reconciliation_statistics
+        - addColumn:
+            tableName: reconciliation
+            columns:
+              - column:
+                  name: caregiver_phone_number_when_issued
+                  type: varchar(100)
+                  afterColumn: issued_date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: actual_caregiving_seconds_when_issued
+                  type: int
+                  afterColumn: caregiver_phone_number_when_issued
+                  constraints:
+                    nullable: false
+              - column:
+                  name: closed_date_time
+                  type: datetime
+                  afterColumn: closing_status
+                  constraints:
+                    nullable: true

@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.8"
+      author: boris
+      changes:
+        - addColumn:
+            tableName: reception
+            columns:
+              - column:
+                  name: period_type
+                  remarks: 희망 간병일의 길고 짧음
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: received_date_time
+                  remarks: 접수 일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: organization_type
+                  remarks: "간병을 관리하는 단체의 구분(INTERNAL: 내부, ORGANIZATION: 협회, AFFILIATED: 제휴사)"
+                  type: varchar(15)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: organization_id
+                  remarks: 간병 관리 단체 아이디(내부의 경우 null)
+                  type: char(26)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: managing_user_id
+                  remarks: 간병을 관리하는 사용자 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: progressing_status
+                  remarks: 접수 진행 상태
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+        - addColumn:
+            tableName: user
+            columns:
+              - column:
+                  name: name
+                  remarks: 사용자 이름
+                  type: varchar(50)
+                  constraints:
+                    nullable: false

@@ -1,0 +1,48 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog.yaml
+  profiles:
+    active: local
+
+cloud:
+  aws:
+    s3:
+      bucket:
+        careinsurance-business-license: careinsurance-business-license-dev
+        careinsurance-reception-application: careinsurance-reception-application-dev
+
+jwt:
+  secret: "LfgHVRrG4rqTjeeI8wx1qvDg8WUFfXW84EYYE8+tnas="
+  access-token-life-span: 300000
+  refresh-token-life-span: 345600000
+
+security:
+  encryption:
+    kms:
+      key-arn: "arn:aws:kms:ap-northeast-2:319747832315:key/56d41503-7627-489d-9213-a70e698336e6"
+    patient-name-pepper: fZbZVrJxfQt+kaR9+KJrG3DMq8VXze2r0zboH4yFJ0k=
+
+email:
+  senders:
+    info:
+      address: info@probe.caredoc.kr
+
+external-api:
+  host: "https://external-api.probe.caredoc.kr"
+
+bizcall-api:
+  host: "https://223.62.241.228"
+  apiKey: "b58b9ab1-e396-402a-8405-cb587d079e6d"
+
+satisfaction-survey:
+  scenario-id: "bizcall_4c2e0e66-3255-427e-9a10-162eaf4c58fa"
+  caller-number: "01047009007"

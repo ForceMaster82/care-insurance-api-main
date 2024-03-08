@@ -1,0 +1,5 @@
+package kr.caredoc.careinsurance.caregiving.progressmessage
+
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface CaregivingProgressMessageSendingHistoryRepository : JpaRepository<CaregivingProgressMessageSendingHistory, String>

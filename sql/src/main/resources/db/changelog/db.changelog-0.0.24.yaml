@@ -1,0 +1,94 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.24"
+      author: boris
+      changes:
+        - createTable:
+            tableName: settlement
+            remarks: 간병비 정산
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: caregiving_round_id
+                  remarks: 정산을 수행할 간병 회차 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiving_round_number
+                  remarks: 정산을 수행할 간병 회차
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: progressing_status
+                  remarks: 진행 상태
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: daily_caregiving_charge
+                  remarks: 일일 간병비
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: basic_amount
+                  remarks: 기본 간병비 합계
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: additional_amount
+                  remarks: 추가 간병비 합계
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_amount
+                  remarks: 정산해야할 간병비 합계
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_calculation_date_time
+                  remarks: 마지막 간병비 계산일
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expected_settlement_date
+                  remarks: 예상 정산일
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: settlement_completion_date_time
+                  remarks: 정산 완료 일시
+                  type: datetime
+                  constraints:
+                    nullable: true
+              - column:
+                  name: settlement_manager_id
+                  remarks: 정산을 수행한 관리자 아이디. 항상 내부 관리자.
+                  type: char(26)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드의 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

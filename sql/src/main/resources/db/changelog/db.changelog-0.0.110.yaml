@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.110"
+      author: boris
+      changes:
+        - addColumn:
+            tableName: user
+            columns:
+              - column:
+                  name: credential_revision
+                  remarks: 간병인 신청서 파일 이름
+                  type: char(26)
+                  constraints:
+                    nullable: true
+                  afterColumn: salt

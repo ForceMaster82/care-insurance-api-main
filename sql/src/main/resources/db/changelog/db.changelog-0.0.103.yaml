@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.103"
+      author: boris
+      changes:
+        - dropColumn:
+            tableName: reception
+            columns:
+              - column:
+                  name: patient_name
+        - dropNotNullConstraint:
+            tableName: reception
+            columnName: hashed_patient_name
+            columnDataType: varchar(100)
+        - dropNotNullConstraint:
+            tableName: reception
+            columnName: encrypted_patient_name
+            columnDataType: text
+        - dropNotNullConstraint:
+            tableName: reception
+            columnName: masked_patient_name
+            columnDataType: varchar(50)

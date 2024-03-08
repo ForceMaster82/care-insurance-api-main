@@ -1,0 +1,76 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.63"
+      author: rena
+      changes:
+        - createTable:
+            tableName: caregiving_progress_message_summary
+            remarks: 진행 알림톡 목록 요약
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: caregiving_round_id
+                  remarks: 진행 알림톡 발송 대상이 되는 간병 회차의 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reception_id
+                  remarks: 진행 알림톡 발송 대상이 되는 접수의 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiving_round_number
+                  remarks: 간병 회차 번호
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiving_progressing_status
+                  remarks: 간병 진행 상태
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date_time
+                  remarks: 간병 시작 일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expected_sending_date
+                  remarks: 발송 예정 일자
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sending_status
+                  remarks: 발송 상태(READY, FAILED, SENT)
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: send_date
+                  remarks: 발송 일자
+                  type: date
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

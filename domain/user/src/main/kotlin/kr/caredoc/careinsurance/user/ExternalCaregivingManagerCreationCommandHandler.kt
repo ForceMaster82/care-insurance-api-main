@@ -1,0 +1,5 @@
+package kr.caredoc.careinsurance.user
+
+interface ExternalCaregivingManagerCreationCommandHandler {
+    fun createExternalCaregivingManager(command: ExternalCaregivingManagerCreationCommand): ExternalCaregivingManagerCreationCommandResult
+}

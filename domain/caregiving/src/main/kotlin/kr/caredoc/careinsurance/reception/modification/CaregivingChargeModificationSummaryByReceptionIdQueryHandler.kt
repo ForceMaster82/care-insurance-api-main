@@ -1,0 +1,5 @@
+package kr.caredoc.careinsurance.reception.modification
+
+interface CaregivingChargeModificationSummaryByReceptionIdQueryHandler {
+    fun getCaregivingChargeModificationSummary(query: CaregivingChargeModificationSummaryByReceptionIdQuery): CaregivingChargeModificationSummary
+}

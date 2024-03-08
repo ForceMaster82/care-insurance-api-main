@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.17"
+      author: rena
+      changes:
+        - addColumn:
+            tableName: external_caregiving_organization
+            columns:
+              - column:
+                  name: bank
+                  remarks: 은행명
+                  type: varchar(20)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: account_holder
+                  remarks: 예금주
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: account_number
+                  remarks: 계좌번호
+                  type: varchar(50)
+                  constraints:
+                    nullable: true

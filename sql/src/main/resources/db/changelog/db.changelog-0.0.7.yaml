@@ -1,0 +1,76 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.7"
+      author: rena
+      changes:
+        - createTable:
+            tableName: external_caregiving_organization
+            remarks: 외부 간병 협회
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: name
+                  remarks: 업체명
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: external_caregiving_organization_type
+                  remarks: "업체 구분(ORGANIZATION: 협회, AFFILIATED: 제휴사)"
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address
+                  remarks: 업체 주소
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contract_name
+                  remarks: 담당자명
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone_number
+                  remarks: 연락처
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: profit_allocation_ratio
+                  remarks: 수익 배분률
+                  type: float
+                  constraints:
+                    nullable: false
+              - column:
+                  name: business_license_file_name
+                  remarks: 사업자 등록증 파일명
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: business_license_url
+                  remarks: 사업자 등록증 파일 URL
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

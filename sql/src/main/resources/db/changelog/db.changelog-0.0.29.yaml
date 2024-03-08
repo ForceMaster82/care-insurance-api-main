@@ -1,0 +1,118 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.29"
+      author: boris
+      changes:
+        - createTable:
+            tableName: daily_reception_statistics
+            remarks: 일자별 간병 접수 통계
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: received_date
+                  remarks: 통계를 이루는 접수들의 접수일
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reception_count
+                  remarks: 접수의 개수
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: canceled_reception_count
+                  remarks: 취소된 접수의 개수
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: canceled_by_personal_caregiver_reception_count
+                  remarks: 개인 간병으로 인해 취소된 접수의 개수
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: canceled_by_medical_request_reception_count
+                  remarks: 의료 행위 요구로 인해 취소된 접수의 개수
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: requested_billing_count
+                  remarks: 지급 요청된 청구의 개수
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: requested_billing_amount
+                  remarks: 지급 요청된 청구의 총 간병비
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deposit_count
+                  remarks: 청구로 인해 발생한 입금 횟수
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deposit_amount
+                  remarks: 청구로 인해 발생한 총 입금액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: withdrawal_count
+                  remarks: 환수로 인해 발생한 출금 횟수
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: withdrawal_amount
+                  remarks: 환수로 인해 발생한 총 출금액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: same_day_assignment_reception_count
+                  remarks: 당일 처리가 요청된 접수의 개수
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: started_same_day_assignment_reception_count
+                  remarks: 당일 처리된 접수의 개수
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: short_term_reception_count
+                  remarks: 단기로 요청된 접수의 개수
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: started_short_term_reception_count
+                  remarks: 처리된 단기 접수의 개수
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드의 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

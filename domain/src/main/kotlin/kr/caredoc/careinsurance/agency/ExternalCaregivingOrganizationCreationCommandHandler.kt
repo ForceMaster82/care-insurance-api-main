@@ -1,0 +1,5 @@
+package kr.caredoc.careinsurance.agency
+
+interface ExternalCaregivingOrganizationCreationCommandHandler {
+    fun createExternalCaregivingOrganization(command: ExternalCaregivingOrganizationCreationCommand): ExternalCaregivingOrganizationCreationResult
+}

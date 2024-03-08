@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.79"
+      author: boris
+      changes:
+        - createTable:
+            tableName: bizcall_reservation
+            remarks: 예약된 비즈콜
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: sending_date_time
+                  remarks: 발송일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: bizcall_id
+                  remarks: 예약된 비즈콜 아이디
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드의 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

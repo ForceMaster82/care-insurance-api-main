@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.78"
+      author: boris
+      changes:
+        - dropColumn:
+            tableName: settlement
+            columns:
+              - column:
+                  name: patient_name
+              - column:
+                  name: hashed_patient_name
+        - dropColumn:
+            tableName: billing
+            columns:
+              - column:
+                  name: patient_name
+        - dropColumn:
+            tableName: caregiving_round
+            columns:
+              - column:
+                  name: patient_name
+              - column:
+                  name: hashed_patient_name

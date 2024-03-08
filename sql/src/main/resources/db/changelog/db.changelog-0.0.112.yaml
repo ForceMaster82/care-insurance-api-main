@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.112"
+      author: boris
+      changes:
+        - createTable:
+            tableName: used_refresh_token
+            remarks: 이미 사용된 리프레쉬 토큰
+            columns:
+              - column:
+                  name: jti
+                  remarks: jti
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: issued_at
+                  remarks: 리프레쉬 토큰의 발급일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: used_at
+                  remarks: 리프레쉬 토큰의 사용일시
+                  type: datetime
+                  constraints:
+                    nullable: false

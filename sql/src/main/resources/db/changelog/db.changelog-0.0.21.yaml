@@ -1,0 +1,76 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.21"
+      author: boris
+      changes:
+        - createTable:
+            tableName: email_sending_log
+            remarks: 이메일 발송 기록
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: recipient_address
+                  remarks: 수신 주소
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sender_address
+                  remarks: 발신 주소
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sender_profile
+                  remarks: 발신 프로필 이름
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  remarks: 발송 시도한 메일 제목
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: result
+                  remarks: "발송 결과(SENT: 발송됨, FAILED: 발송 실패)"
+                  type: varchar(25)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sent_date_time
+                  remarks: 발송 성공 일시
+                  type: datetime
+                  constraints:
+                    nullable: true
+              - column:
+                  name: reason_for_failure
+                  remarks: "실패 사유(예외 이름)"
+                  type: text
+                  constraints:
+                    nullable: true
+              - column:
+                  name: failure_message
+                  remarks: "실패 메시지(예외 메시지)"
+                  type: text
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드의 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

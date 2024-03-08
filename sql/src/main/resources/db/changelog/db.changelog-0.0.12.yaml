@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: “0.0.12”
+      author: boris
+      changes:
+        - addColumn:
+            tableName: user
+            columns:
+              - column:
+                  name: last_login_date_time
+                  remarks: 마지막 로그인 일시
+                  type: datetime
+                  constraints:
+                    nullable: true
+        - update:
+            tableName: user
+            columns:
+              - column:
+                  name: last_login_date_time
+                  valueComputed: created_at
+        - addNotNullConstraint:
+            tableName: user
+            columnName: last_login_date_time
+            columnDataType: datetime

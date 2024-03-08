@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.38"
+      author: eddy
+      changes:
+        - addColumn:
+            tableName: billing
+            columns:
+              - column:
+                  name: total_deposit_amount
+                  remarks: 입금 내역의 총액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_withdrawal_amount
+                  remarks: 출금 내역의 총액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_transaction_date
+                  remarks: 입/출금 마지막 내역 일자
+                  type: datetime
+                  constraints:
+                    nullable: true
+        - createTable:
+            tableName: billing_transaction_record
+            remarks: 청구 입/출금 내역
+            columns:
+              - column:
+                  name: billing_id
+                  remarks: 청구 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_type
+                  remarks: 입/출금 구분
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount
+                  remarks: 입/출금 액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_date
+                  remarks: 일/출금 일자
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: entered_date_time
+                  remarks: 입력 일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_subject_id
+                  remarks: 입/출금 내역을 처리한 관리자 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false

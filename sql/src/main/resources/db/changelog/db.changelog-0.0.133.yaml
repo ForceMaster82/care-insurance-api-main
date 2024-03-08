@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.133"
+      author: boris
+      changes:
+        - addColumn:
+            tableName: user
+            columns:
+              - column:
+                  name: password_expiration_date_time
+                  type: datetime
+                  afterColumn: credential_revision
+                  constraints:
+                    nullable: true

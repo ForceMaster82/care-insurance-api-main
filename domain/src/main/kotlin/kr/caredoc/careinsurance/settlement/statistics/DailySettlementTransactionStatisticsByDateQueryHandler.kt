@@ -1,0 +1,5 @@
+package kr.caredoc.careinsurance.settlement.statistics
+
+interface DailySettlementTransactionStatisticsByDateQueryHandler {
+    fun getDailySettlementTransactionStatistics(query: DailySettlementTransactionStatisticsByDateQuery): DailySettlementTransactionStatistics?
+}

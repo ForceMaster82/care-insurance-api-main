@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.73"
+      author: boris
+      changes:
+        - addColumn:
+            tableName: reception
+            columns:
+              - column:
+                  name: hashed_patient_name
+                  remarks: 해시된 환자 이름
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+        - addColumn:
+            tableName: settlement
+            columns:
+              - column:
+                  name: hashed_patient_name
+                  remarks: 해시된 환자 이름
+                  type: varchar(100)
+                  constraints:
+                    nullable: true
+        - addColumn:
+            tableName: caregiving_round
+            columns:
+              - column:
+                  name: hashed_patient_name
+                  remarks: 해시된 환자 이름
+                  type: varchar(100)
+                  constraints:
+                    nullable: true

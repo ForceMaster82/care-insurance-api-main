@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: “0.0.14”
+      author: boris
+      changes:
+        - addColumn:
+            tableName: reception
+            columns:
+              - column:
+                  name: expected_caregiving_limit_date
+                  remarks: 예상 간병 제공 한도일
+                  type: date
+                  constraints:
+                    nullable: false

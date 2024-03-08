@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.4"
+      author: rena
+      changes:
+        - createTable:
+            tableName: internal_caregiving_manager
+            remarks: 내부사용자
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  remarks: user 정보의 id
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  remarks: 이름
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: nickname
+                  remarks: 닉네임
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone_number
+                  remarks: 연락처
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  remarks: 주요업무
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: memo
+                  remarks: 메모
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드의 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

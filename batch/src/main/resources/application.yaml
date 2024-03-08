@@ -1,0 +1,59 @@
+spring:
+  batch:
+    job:
+      name: ${job.name:EMPTY}
+      force-run: ${job.force-run:false}
+    jdbc:
+      initialize-schema: always
+  main:
+    web-application-type: none
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog.yaml
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:care_insurance
+    username: su
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate.format_sql: true
+      hibernate:
+        show_sql: true
+  profiles:
+    active: local
+
+logging:
+  level:
+    root: info
+
+cloud:
+  aws:
+    s3:
+      bucket:
+        careinsurance-business-license: careinsurance-business-license-dev
+        careinsurance-reception-application: careinsurance-reception-application-dev
+
+security:
+  encryption:
+    kms:
+      key-arn: "arn:aws:kms:ap-northeast-2:319747832315:key/6e12afea-2a11-48ca-b8b5-1fd906689a54"
+    patient-name-pepper: fZbZVrJxfQt+kaR9+KJrG3DMq8VXze2r0zboH4yFJ0k=
+
+email:
+  senders:
+    info:
+      address: info@probe.caredoc.kr
+
+external-api:
+  host: "https://external-api.probe.caredoc.kr"
+
+bizcall-api:
+  host: "https://223.62.241.228"
+  apiKey: "b58b9ab1-e396-402a-8405-cb587d079e6d"
+
+satisfaction-survey:
+  scenario-id: "bizcall_4c2e0e66-3255-427e-9a10-162eaf4c58fa"
+  caller-number: "01047009007"

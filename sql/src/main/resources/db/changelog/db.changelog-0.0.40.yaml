@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.40"
+      author: boris
+      changes:
+        - modifyDataType:
+            tableName: file_meta
+            columnName: mime
+            newDataType: varchar(255)

@@ -1,0 +1,190 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.22"
+      author: rena
+      changes:
+        - createTable:
+            tableName: caregiving_charge
+            remarks: 간병비 산정
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: caregiving_round_id
+                  remarks: 간병 회차 식별자
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiving_round_number
+                  remarks: 간병 회차 번호
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date_time
+                  remarks: 간병 시작 일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_date_time
+                  remarks: 간병 종료 일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: daily_caregiving_charge
+                  remarks: 1일 간병료
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reception_id
+                  remarks: 접수 정보 식별자
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiving_charge_confirm_status
+                  remarks: 간병비 산정 확정 상태
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiving_charge_date
+                  remarks: 간병비 산정 일자
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: additional_hours_charge
+                  remarks: 추가 시간으로 인한 간병비
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: meal_cost
+                  remarks: 식대
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transportation_fee
+                  remarks: 교통비
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: holiday_charge
+                  remarks: 명절 근무비
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiver_insurance_fee
+                  remarks: 간병인의 배상 책임 보험비
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: commission_fee
+                  remarks: 케어닥 수수료
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: vacation_charge
+                  remarks: 유급 휴가비
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patient_condition_charge
+                  remarks: 환자 상태에 의한 간병비
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: covid19_testing_cost
+                  remarks: 코로나 검사비
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: outstanding_amount
+                  remarks: 간병비 미지급
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_cancel_after_arrived
+                  remarks: 도착 후 취소 여부
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expected_settlement_date
+                  remarks: 정산 예정 일자
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: basic_amount
+                  remarks: 기본 간병비
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: additional_amount
+                  remarks: 추가 간병비
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_amount
+                  remarks: 총 간병비
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드의 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: caregiving_additional_etc_charge
+            remarks: 간병비 추가 기타 산정 내역
+            columns:
+              - column:
+                  name: caregiving_charge_id
+                  remarks: 간병비 산정 식별자
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: name
+                  remarks: 계정과목명
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: amount
+                  remarks: 간병금액
+                  type: int
+                  constraints:
+                    nullable: false

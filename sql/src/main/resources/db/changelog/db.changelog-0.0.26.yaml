@@ -1,0 +1,81 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.26"
+      author: eddy
+      changes:
+        - createTable:
+            tableName: billing
+            remarks: 간병비 청구
+            columns:
+              - column:
+                  name: id
+                  remarks: 청구 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reception_id
+                  remarks: 청구를 진행할 접수 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: accident_number
+                  remarks: 사고 번호
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patient_name
+                  remarks: 환자 이름
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiving_round_id
+                  remarks: 청산을 진행할 간병회차 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: round_number
+                  remarks: 간병 회차 번호
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date_time
+                  remarks: 간병 시작 일자
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_date_time
+                  remarks: 간병 종료 일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_amount
+                  remarks: 청구해야할 간병비 합계
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: billing_progressing_status
+                  remarks: 청구 진행 상태
+                  type: varchar(40)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드의 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

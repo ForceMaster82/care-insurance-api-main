@@ -1,0 +1,78 @@
+aws:
+  region: ap-northeast-2
+spring:
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog.yaml
+  datasource:
+    driver-class-name: com.amazonaws.secretsmanager.sql.AWSSecretsManagerMySQLDriver
+    url: jdbc-secretsmanager:mysql://caredoc.cluster-cdgkkyugu5m1.ap-northeast-2.rds.amazonaws.com:3306/caredoc
+    username: rds!cluster-03db4b20-d6c2-44e0-bd3c-48f98283d13c
+#    password: 1234
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:care_insurance
+#    username: su
+#    password:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        show-sql: true
+        format_sql: true
+#        use_sql_comments: true
+  profiles:
+    active: local
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.orm.jdbc.bind: trace
+#    root: info
+
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+jwt:
+  secret: "LfgHVRrG4rqTjeeI8wx1qvDg8WUFfXW84EYYE8+tnas="
+  access-token-life-span: 300000
+  refresh-token-life-span: 345600000
+
+cloud:
+  aws:
+    s3:
+      bucket:
+#        careinsurance-business-license: careinsurance-business-license-dev
+#        careinsurance-reception-application: careinsurance-reception-application-dev
+        careinsurance-business-license: dev-339712997223-ap-northeast-2-caredoc-business-license
+        careinsurance-reception-application: dev-339712997223-ap-northeast-2-caredoc-reception-application
+
+security:
+  encryption:
+    kms:
+      key-arn: "arn:aws:kms:ap-northeast-2:319747832315:key/6e12afea-2a11-48ca-b8b5-1fd906689a54"
+    patient-name-pepper: fZbZVrJxfQt+kaR9+KJrG3DMq8VXze2r0zboH4yFJ0k=
+
+email:
+  senders:
+    info:
+      address: info@probe.caredoc.kr
+
+external-api:
+  host: "https://external-api.probe.caredoc.kr"
+
+bizcall-api:
+  host: "https://223.62.241.228"
+  apiKey: "b58b9ab1-e396-402a-8405-cb587d079e6d"
+
+satisfaction-survey:
+  scenario-id: "bizcall_4c2e0e66-3255-427e-9a10-162eaf4c58fa"
+  caller-number: "01047009007"

@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.73"
+      author: boris
+      changes:
+        - addColumn:
+            tableName: reception
+            columns:
+              - column:
+                  name: encrypted_patient_name
+                  remarks: 암호화된 환자 이름
+                  type: text
+                  constraints:
+                    nullable: true

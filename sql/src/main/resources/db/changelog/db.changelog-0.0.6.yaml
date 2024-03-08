@@ -1,0 +1,178 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.6"
+      author: boris
+      changes:
+        - createTable:
+            tableName: reception
+            remarks: 간병 접수
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: insurance_number
+                  remarks: 보험 증권 번호
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: subscription_date
+                  remarks: 보험 청약일
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: coverage_id
+                  remarks: 청구의 근거가 되는 가입 담보 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiving_limit_period
+                  remarks: 간병 한도일
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patient_name
+                  remarks: 환자 이름
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patient_nickname
+                  remarks: 환자 별명
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: patient_age
+                  remarks: 환자 나이
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patient_sex
+                  remarks: 환자 성별
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patient_primary_phone_number
+                  remarks: 환자 주 연락처
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: relationship_with_patient_primary_contact
+                  remarks: 환자와 환자 주 연락처 소유자와의 관계
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patient_secondary_phone_number
+                  remarks: 환자 부 연락처
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: relationship_with_patient_secondary_contact
+                  remarks: 환자와 환자 부 연락처 소유자와의 관계
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: accident_number
+                  remarks: 사고 번호
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: accident_date_time
+                  remarks: 사고 발생 일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: claim_type
+                  remarks: "청구 구분(ACCIDENT: 사고로 인한 청구, SICKNESS: 질병으로 인한 청구)"
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patient_description
+                  remarks: 환자 상태
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: admission_date_time
+                  remarks: 입원 일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: hospital_and_room
+                  remarks: 병실 정보
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: insurance_manager_branch_name
+                  remarks: 접수부점
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: insurance_manager_phone_number
+                  remarks: 접수한 보험회사 직원 연락처
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: receptionist_name
+                  remarks: 접수한 보험회사 직원 이름
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: desired_caregiving_start_date
+                  remarks: 희망 간병 시작일
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: urgency
+                  remarks: 긴급도
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: desired_caregiving_period
+                  remarks: 희망 간병 기간
+                  type: int
+                  constraints:
+                    nullable: true
+              - column:
+                  name: additional_requests
+                  remarks: 추가 요청 사항
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드의 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

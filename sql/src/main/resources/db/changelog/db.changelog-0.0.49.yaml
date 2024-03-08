@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.49"
+      author: eddy
+      changes:
+        - addColumn:
+            tableName: billing
+            columns:
+              - column:
+                  name: is_cancel_after_arrived
+                  remarks: 도착 후 취소 여부
+                  type: boolean
+                  constraints:
+                    nullable: false

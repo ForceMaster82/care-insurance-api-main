@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: “0.0.15”
+      author: boris
+      changes:
+        - addColumn:
+            tableName: reception
+            columns:
+              - column:
+                  name: patient_height
+                  remarks: 환자 키
+                  type: int
+                  constraints:
+                    nullable: true
+              - column:
+                  name: patient_weight
+                  remarks: 환자 질량
+                  type: int
+                  constraints:
+                    nullable: true
+              - column:
+                  name: hospital_state
+                  remarks: 병원이 위치한 시/도
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: hospital_city
+                  remarks: 병원이 위치한 시/군/구
+                  type: varchar(50)
+                  constraints:
+                    nullable: true

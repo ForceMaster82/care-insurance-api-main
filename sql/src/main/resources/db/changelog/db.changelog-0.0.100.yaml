@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.100"
+      author: rena
+      changes:
+        - addColumn:
+            tableName: reconciliation
+            columns:
+              - column:
+                  name: issued_type
+                  remarks: "대사할 거래의 발생 타입(FINISH: 종료, ADDITIONAL: 청구 추가, TRANSACTION: 정산 입출금)"
+                  type: varchar(15)
+                  afterColumn: closing_status
+                  constraints:
+                    nullable: true

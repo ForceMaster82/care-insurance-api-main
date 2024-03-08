@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.2"
+      author: boris
+      changes:
+        - createTable:
+            tableName: coverage
+            remarks: 보험 담보
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: name
+                  remarks: 담보명
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: target_subscription_year
+                  remarks: 담보 설정이 이뤄질 수 있는 청약 연도
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드의 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

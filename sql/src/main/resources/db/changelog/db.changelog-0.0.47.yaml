@@ -1,0 +1,70 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.47"
+      author: rena
+      changes:
+        - createTable:
+            tableName: reception_history
+            remarks: 접수의 변경 이력
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: reception_id
+                  remarks: 변경이 발생한 접수 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: properties_name
+                  remarks: 수정 항목
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: previous_data
+                  remarks: 이전 데이터
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_data
+                  remarks: 변경 데이터
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: external_caregiving_manager_id
+                  remarks: 외부 제휴사(협회) 계정 id
+                  type: char(26)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: internal_caregiving_manager_id
+                  remarks: 내부 관리자 계정 id
+                  type: char(26)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: manager_name
+                  remarks: 관리자 성명
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.48"
+      author: boris
+      changes:
+        - createTable:
+            tableName: caregiving_round_modification_summary
+            remarks: 간병 회차 수정 내역 개요
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: reception_id
+                  remarks: 개요가 설명하는 접수의 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modified_date_time
+                  remarks: 마지막 수정일
+                  type: datetime
+                  constraints:
+                    nullable: true
+              - column:
+                  name: last_modifier_id
+                  remarks: 마지막으로 수정한 사용자의 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: modification_count
+                  remarks: 수정 횟수
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

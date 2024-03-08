@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.108"
+      author: eddy
+      changes:
+        - addColumn:
+            tableName: reception
+            columns:
+              - column:
+                  name: reception_application_file_name
+                  remarks: 간병인 신청서 파일 이름
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: reception_application_file_url
+                  remarks: 간병인 신청서 파일 URL
+                  type: varchar(255)
+                  constraints:
+                    nullable: true

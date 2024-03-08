@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.106"
+      author: rena
+      changes:
+        - createTable:
+            tableName: user_authorization_logging
+            remarks: 유저 접근권한 로그
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: granted_user_id
+                  remarks: 권한부여 및 변경되는 유저 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: granted_roles
+                  remarks: "부여된 권한(INTERNAL_USER: 내부 관리자, EXTERNAL_USER: 제휴사 사용자, UNKNOWN_USER: 알수 없는 유저)"
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: granted_type
+                  remarks: "부여된 유형(GRANTED: 부여됨, REVOKED: 취소됨)"
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: granter_id
+                  remarks: 접근 권한을 처리한 처리자
+                  type: char(26)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: granted_date_time
+                  remarks: 접근 권한을 처리한 일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

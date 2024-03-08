@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.56"
+      author: eddy
+      changes:
+        - createTable:
+            tableName: daily_caregiving_round_billing_transaction_statistics
+            remarks: 일자별 청구 입출금 통계
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: reception_id
+                  remarks: 집계된 간병 접수가 속한 접수 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiving_round_id
+                  remarks: 집계된 간병 접수 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date
+                  remarks: 집계 범위(하루)
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_deposit_amount
+                  remarks: 입금 총액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_withdrawal_amount
+                  remarks: 출금 총액
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_entered_date_time
+                  remarks: 집계된 입/출금 내역중 가장 마지막으로 입력된 입/출금 내역의 입력일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드의 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

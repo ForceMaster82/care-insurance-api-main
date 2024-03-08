@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: “0.0.13”
+      author: boris
+      changes:
+        - addColumn:
+            tableName: reception
+            columns:
+              - column:
+                  name: register_manager_id
+                  remarks: 접수 관리자 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false

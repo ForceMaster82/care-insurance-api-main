@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.1"
+      author: boris
+      changes:
+        - createTable:
+            tableName: user
+            remarks: 사용자
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: email_address
+                  remarks: 로그인을 위한 이메일 주소
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: hashed_password
+                  remarks: 로그인을 위한 비밀번호. 암호화됨
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: salt
+                  remarks: 비밀번호 암호화 소금
+                  type: char(16)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: suspended
+                  remarks: 사용 중지 여/부
+                  type: tinyint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드의 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false

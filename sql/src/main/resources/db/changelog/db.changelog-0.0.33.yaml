@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: “0.0.33”
+      author: eddy
+      changes:
+        - addColumn:
+            tableName: billing
+            columns:
+              - column:
+                  name: billing_date
+                  remarks: 청구 일자
+                  type: datetime
+                  constraints:
+                    nullable: true
+              - column:
+                  name: subscription_date
+                  remarks: 청약 일자
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: additional_hours
+                  remarks: 추가 시간
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: additional_amount
+                  remarks: 추가 비용
+                  type: int
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: billing_basic_amounts
+            remarks: 청구를
+            columns:
+              - column:
+                  name: billing_id
+                  remarks: 청구 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: target_accident_year
+                  remarks: 적용 연도
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: daily_caregiving_charge
+                  remarks: 일일 간병비
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiving_days
+                  remarks: 적용 일수
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_amount
+                  remarks: 적용 연도별 일일 간병비와 적용 일수로 계산한 총 금액
+                  type: int
+                  constraints:
+                    nullable: false

@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.127"
+      author: eddy
+      changes:
+        - modifyDataType:
+            tableName: billing
+            columnName: start_date_time
+            newDataType: datetime

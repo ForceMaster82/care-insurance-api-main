@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.147"
+      author: boris
+      changes:
+        - addColumn:
+            tableName: billing
+            columns:
+              - column:
+                  name: organization_type
+                  remarks: "간병을 관리하는 단체의 구분(INTERNAL: 내부, ORGANIZATION: 협회, AFFILIATED: 제휴사)"
+                  type: varchar(15)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: organization_id
+                  remarks: 간병 관리 단체 아이디(내부의 경우 null)
+                  type: char(26)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: managing_user_id
+                  remarks: 간병을 관리하는 관리자 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: true

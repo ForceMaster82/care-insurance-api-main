@@ -1,0 +1,5 @@
+package kr.caredoc.careinsurance.reconciliation.statistics
+
+interface MonthlyReconciliationStatisticsByYearAndMonthQueryHandler {
+    fun getMonthlyReconciliationStatistics(query: MonthlyReconciliationStatisticsByYearAndMonthQuery): MonthlyReconciliationStatistics?
+}

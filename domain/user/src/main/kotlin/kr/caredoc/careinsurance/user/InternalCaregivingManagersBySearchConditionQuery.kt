@@ -1,0 +1,22 @@
+package kr.caredoc.careinsurance.user
+
+import kr.caredoc.careinsurance.search.SearchCondition
+import kr.caredoc.careinsurance.security.accesscontrol.Action
+import kr.caredoc.careinsurance.security.accesscontrol.ActionAttribute
+import kr.caredoc.careinsurance.security.accesscontrol.ActionType
+import kr.caredoc.careinsurance.security.accesscontrol.Subject
+
+data class InternalCaregivingManagersBySearchConditionQuery(
+    val searchCondition: SearchCondition<SearchingProperty>,
+    val subject: Subject,
+) : Action {
+    enum class SearchingProperty {
+        NAME,
+        EMAIL,
+    }
+
+    override fun get(attribute: ActionAttribute) = when (attribute) {
+        ActionAttribute.ACTION_TYPE -> setOf(ActionType.READ_ALL)
+        else -> setOf()
+    }
+}

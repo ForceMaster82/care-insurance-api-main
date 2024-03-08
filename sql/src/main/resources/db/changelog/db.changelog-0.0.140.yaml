@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.140"
+      author: eddy
+      changes:
+        - dropNotNullConstraint:
+            tableName: reception
+            columnName: insurance_manager_phone_number
+            columnDataType: varchar(50)

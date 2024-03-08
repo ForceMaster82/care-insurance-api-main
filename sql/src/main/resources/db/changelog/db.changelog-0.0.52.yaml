@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.52"
+      author: boris
+      changes:
+        - addColumn:
+            tableName: reception
+            columns:
+              - column:
+                  name: notify_caregiving_progress
+                  type: tinyint
+                  afterColumn: reason_for_cancellation
+                  constraints:
+                    nullable: false

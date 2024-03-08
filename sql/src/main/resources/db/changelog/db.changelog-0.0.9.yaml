@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.9"
+      author: boris
+      changes:
+        - addColumn:
+            tableName: coverage
+            columns:
+              - column:
+                  name: renewal_type
+                  remarks: "가입 담보의 갱신 구분(THREE_YEAR: 3년형, TEN_YEAR: 10년형)"
+                  type: varchar(15)
+                  constraints:
+                    nullable: true
+        - update:
+            tableName: coverage
+            columns:
+              - column:
+                  name: renewal_type
+                  value: "TEN_YEAR"
+        - addNotNullConstraint:
+            tableName: coverage
+            columnName: renewal_type
+            columnDataType: varchar(15)

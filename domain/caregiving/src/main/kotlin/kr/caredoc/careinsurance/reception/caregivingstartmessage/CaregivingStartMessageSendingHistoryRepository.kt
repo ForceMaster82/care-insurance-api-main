@@ -1,0 +1,5 @@
+package kr.caredoc.careinsurance.reception.caregivingstartmessage
+
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface CaregivingStartMessageSendingHistoryRepository : JpaRepository<CaregivingStartMessageSendingHistory, String>

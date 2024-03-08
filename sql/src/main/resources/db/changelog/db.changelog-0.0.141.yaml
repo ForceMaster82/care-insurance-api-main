@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.141"
+      author: boris
+      changes:
+        - addColumn:
+            tableName: caregiving_additional_etc_charge
+            columns:
+              - column:
+                  name: sequence
+                  remarks: "순서"
+                  type: int
+                  constraints:
+                    nullable: false

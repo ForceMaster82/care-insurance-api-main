@@ -1,0 +1,70 @@
+databaseChangeLog:
+  - changeSet:
+      id: "0.0.51"
+      author: boris
+      changes:
+        - createTable:
+            tableName: caregiving_round_modification_history
+            remarks: 간병 회차 수정 내역
+            columns:
+              - column:
+                  name: id
+                  remarks: 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: reception_id
+                  remarks: 수정 내역이 설명하는 접수의 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: caregiving_round_number
+                  remarks: 수정된 간병 회차
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_property
+                  remarks: 수정된 속성
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: previous
+                  remarks: 수정 전 값
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: modified
+                  remarks: 수정 후 값
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: modifier_id
+                  remarks: 수정한 사용자 아이디
+                  type: char(26)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_date_time
+                  remarks: 수정 일시
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  remarks: 레코드 생성시간
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  remarks: 레코드 마지막 수정시간
+                  type: datetime
+                  constraints:
+                    nullable: false
