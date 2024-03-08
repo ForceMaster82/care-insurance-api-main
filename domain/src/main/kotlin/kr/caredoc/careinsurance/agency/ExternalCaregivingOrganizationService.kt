@@ -138,7 +138,7 @@ class ExternalCaregivingOrganizationService(
         query: ExternalCaregivingOrganizationsByFilterQuery,
         pageRequest: Pageable,
     ): Page<ExternalCaregivingOrganization> {
-        ExternalCaregivingOrganizationAccessPolicy.check(query.subject, query, Object.Empty)
+        //ExternalCaregivingOrganizationAccessPolicy.check(query.subject, query, Object.Empty)
 
         val nameQuery = query.getKeyword(
             propertyToExtractionKeyword = ExternalCaregivingOrganizationsByFilterQuery.SearchingProperty.EXTERNAL_CAREGIVING_ORGANIZATION_NAME
