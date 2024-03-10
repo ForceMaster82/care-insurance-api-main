@@ -1,9 +1,11 @@
 package kr.caredoc.careinsurance.web.settlement
 
 import kr.caredoc.careinsurance.security.accesscontrol.Subject
+import kr.caredoc.careinsurance.settlement.statistics.DailyCaregivingRoundSettlementTransactionStatisticsByDateQuery
 import kr.caredoc.careinsurance.settlement.statistics.DailySettlementTransactionStatistics
 import kr.caredoc.careinsurance.settlement.statistics.DailySettlementTransactionStatisticsByDateQuery
 import kr.caredoc.careinsurance.settlement.statistics.DailySettlementTransactionStatisticsByDateQueryHandler
+import kr.caredoc.careinsurance.web.search.QueryParser
 import kr.caredoc.careinsurance.web.settlement.response.DailySettlementTransactionStatisticsResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -17,15 +19,23 @@ import java.time.LocalDate
 class DailySettlementTransactionStatisticsController(
     private val dailySettlementTransactionStatisticsByDateQueryHandler: DailySettlementTransactionStatisticsByDateQueryHandler,
 ) {
+    private val queryParser = QueryParser(
+        mapOf(
+            "patientName" to DailySettlementTransactionStatisticsByDateQuery.SearchingProperty.PATIENT_NAME,
+        )
+    )
+
     @GetMapping
     fun getDailySettlementTransactionStatistics(
         @RequestParam("date") date: LocalDate,
+        @RequestParam("query", required = false) query: String?,
         subject: Subject,
     ): ResponseEntity<List<DailySettlementTransactionStatisticsResponse>> {
         val statistics = dailySettlementTransactionStatisticsByDateQueryHandler.getDailySettlementTransactionStatistics(
             DailySettlementTransactionStatisticsByDateQuery(
                 date = date,
                 subject = subject,
+                searchCondition = query?.let { queryParser.parse(it) },
             )
         )
 
