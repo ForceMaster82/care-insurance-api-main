@@ -16,7 +16,7 @@ data class CaregiverInfo(
     val name: String,
     @Enumerated(EnumType.STRING)
     val sex: Sex,
-    val birthDate: LocalDate,
+    val birthDate: String,
     val phoneNumber: String,
     val dailyCaregivingCharge: Int,
     val commissionFee: Int,

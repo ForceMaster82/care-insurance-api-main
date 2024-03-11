@@ -19,7 +19,7 @@ data class CaregivingRoundEditingRequest(
         val caregiverOrganizationId: String?,
         val name: String,
         val sex: Sex,
-        val birthDate: LocalDate,
+        val birthDate: String,
         val insured: Boolean,
         val phoneNumber: String,
         val dailyCaregivingCharge: Int,

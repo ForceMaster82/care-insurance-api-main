@@ -29,7 +29,7 @@ data class DetailCaregivingRoundResponse(
         val caregiverOrganizationId: String?,
         val name: String,
         val sex: Sex?,
-        val birthDate: LocalDate,
+        val birthDate: String,
         val phoneNumber: String?,
         val insured: Boolean,
         val dailyCaregivingCharge: Int,
