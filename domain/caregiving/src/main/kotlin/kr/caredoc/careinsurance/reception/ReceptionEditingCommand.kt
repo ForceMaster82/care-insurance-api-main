@@ -14,7 +14,7 @@ data class ReceptionEditingCommand(
     val accidentInfo: AccidentInfo,
     val caregivingManagerInfo: CaregivingManagerInfo?,
     val desiredCaregivingStartDate: LocalDate,
-    val desiredCaregivingPeriod: Int?,
+    val desiredCaregivingPeriod: String?,
     val additionalRequests: String,
     val expectedCaregivingLimitDate: LocalDate,
     val progressingStatus: ReceptionProgressingStatus,

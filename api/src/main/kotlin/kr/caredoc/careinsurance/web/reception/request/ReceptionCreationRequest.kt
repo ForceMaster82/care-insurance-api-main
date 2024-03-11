@@ -15,7 +15,7 @@ data class ReceptionCreationRequest(
     val receivedDateTime: OffsetDateTime,
     val desiredCaregivingStartDate: LocalDate,
     val urgency: Reception.Urgency,
-    val desiredCaregivingPeriod: Int?,
+    val desiredCaregivingPeriod: String?,
     val notifyCaregivingProgress: Boolean,
     val additionalRequests: String,
 ) {

@@ -23,7 +23,7 @@ class ReceptionModified(
     val receivedDateTime: LocalDateTime,
     val urgency: Reception.Urgency,
     val expectedCaregivingLimitDate: Modification<LocalDate>,
-    val desiredCaregivingPeriod: Modification<Int?>,
+    val desiredCaregivingPeriod: Modification<String?>,
     val additionalRequests: Modification<String>,
     val cause: Cause,
     val editingSubject: Subject,

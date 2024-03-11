@@ -19,7 +19,7 @@ data class ReceptionCreationCommand(
     val receivedDateTime: LocalDateTime,
     val desiredCaregivingStartDate: LocalDate,
     val urgency: Reception.Urgency,
-    val desiredCaregivingPeriod: Int?,
+    val desiredCaregivingPeriod: String?,
     val additionalRequests: String,
     val notifyCaregivingProgress: Boolean,
     val subject: Subject,

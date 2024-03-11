@@ -12,7 +12,7 @@ data class ReceptionEditingRequest(
     val patientInfo: PatientInfo,
     val accidentInfo: AccidentInfo,
     val desiredCaregivingStartDate: LocalDate,
-    val desiredCaregivingPeriod: Int?,
+    val desiredCaregivingPeriod: String?,
     val additionalRequests: String,
     val caregivingManagerInfo: CaregivingManagerInfo?,
     val expectedCaregivingLimitDate: LocalDate,

@@ -16,7 +16,7 @@ data class SimpleReceptionResponse(
     val progressingStatus: ReceptionProgressingStatus,
     val desiredCaregivingStartDate: LocalDate,
     val urgency: Reception.Urgency,
-    val desiredCaregivingPeriod: Int?,
+    val desiredCaregivingPeriod: String?,
     val periodType: Reception.PeriodType,
     val receivedDateTime: OffsetDateTime,
 ) {

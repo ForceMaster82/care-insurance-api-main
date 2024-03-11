@@ -18,7 +18,7 @@ data class DetailReceptionResponse(
     val registerManagerInfo: RegisterManagerInfo,
     val desiredCaregivingStartDate: LocalDate,
     val urgency: Reception.Urgency,
-    val desiredCaregivingPeriod: Int?,
+    val desiredCaregivingPeriod: String?,
     val additionalRequests: String,
     val expectedCaregivingStartDate: LocalDate?,
     val expectedCaregivingLimitDate: LocalDate,

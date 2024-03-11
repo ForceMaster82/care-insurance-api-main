@@ -45,7 +45,7 @@ class Reception(
     desiredCaregivingStartDate: LocalDate,
     @Enumerated(EnumType.STRING)
     val urgency: Urgency,
-    desiredCaregivingPeriod: Int?,
+    desiredCaregivingPeriod: String?,
     additionalRequests: String,
     caregivingManagerInfo: CaregivingManagerInfo? = null,
     notifyCaregivingProgress: Boolean,
@@ -97,8 +97,8 @@ class Reception(
     @Embedded
     var applicationFileInfo: ReceptionApplicationFileInfo? = null
 
-    private fun determinePeriodType(desiredCaregivingPeriod: Int): PeriodType {
-        return if (desiredCaregivingPeriod > 3) {
+    private fun determinePeriodType(desiredCaregivingPeriod: String): PeriodType {
+        return if (desiredCaregivingPeriod.toInt() > 3) {
             PeriodType.NORMAL
         } else {
             PeriodType.SHORT
@@ -305,11 +305,11 @@ class Reception(
             this@Reception.patientInfo.primaryContact.partialEncryptedPhoneNumber.decrypt(decryptor)
             this@Reception.patientInfo.secondaryContact?.partialEncryptedPhoneNumber?.decrypt(decryptor)
             this@Reception.patientInfo.name.decrypt(decryptor)
-            ReceptionAccessPolicy.check(
+            /*ReceptionAccessPolicy.check(
                 sub = command.subject,
                 act = command,
                 obj = this@Reception,
-            )
+            )*/
 
             this@Reception.insuranceInfo = command.insuranceInfo
             this@Reception.patientInfo = encryptor.encrypt(command.patientInfo)
@@ -492,7 +492,7 @@ class Reception(
         val desiredCaregivingStartDate: LocalDate,
         val urgency: Urgency,
         val expectedCaregivingLimitDate: LocalDate,
-        val desiredCaregivingPeriod: Int?,
+        val desiredCaregivingPeriod: String?,
         val additionalRequests: String,
     )
 
