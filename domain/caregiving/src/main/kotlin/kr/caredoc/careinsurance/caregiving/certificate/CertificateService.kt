@@ -98,6 +98,7 @@ class CertificateService(
                 hospitalCity = reception.accidentInfo.hospitalAndRoomInfo.city,
                 hospitalAndRoom = reception.accidentInfo.hospitalAndRoomInfo.hospitalAndRoom,
                 caregiverName = caregivingRound.caregiverInfo?.name ?: "-",
+                caregiverBirthDate = caregivingRound.caregiverInfo?.birthDate ?: "",
                 caregiverSex = caregivingRound.caregiverInfo?.sex ?: Sex.FEMALE,
                 caregiverPhoneNumber = caregivingRound.caregiverInfo?.phoneNumber ?: "-",
                 caregivingOrganizationName = caregivingOrganization?.name ?: "㈜ 케어닥",

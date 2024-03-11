@@ -343,6 +343,7 @@ object CertificateTemplate {
         val hospitalCity: String?,
         val hospitalAndRoom: String,
         val caregiverName: String,
+        val caregiverBirthDate : String,
         val caregiverSex: Sex,
         val caregiverPhoneNumber: String,
         val caregivingOrganizationName: String,
@@ -452,6 +453,12 @@ object CertificateTemplate {
                             noBorder()
                         }
                         signingPlaceHolderCell(certificateData.caregiverName) {
+                            noBorder()
+                        }
+                        signingInfoCell(certificateData.caregiverBirthDate) {
+                            noBorder()
+                        }
+                        signingPlaceHolderCell(certificateData.caregiverBirthDate) {
                             noBorder()
                         }
                         signingInfoCell(todayString) {
@@ -665,9 +672,10 @@ object CertificateTemplate {
                     contentLabelCell("간병인성명") { noTopBorder() }
                     contentCell(certificateData.caregiverName) { border = Rectangle.BOTTOM + Rectangle.LEFT }
                     contentLabelCell("간병인 생년월일")
-                    contentCell("") {
+                    /*contentCell("") {
                         border = Rectangle.BOTTOM + Rectangle.LEFT + Rectangle.TOP
-                    }
+                    }*/
+                    contentCell(certificateData.caregiverBirthDate) { border = Rectangle.BOTTOM + Rectangle.LEFT + Rectangle.TOP }
                 }
             }
             nestedTable(2) {
