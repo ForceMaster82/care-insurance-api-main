@@ -1,6 +1,8 @@
 package kr.caredoc.careinsurance.web.reception.handler
 
 import kr.caredoc.careinsurance.reception.ReferenceReceptionNotExistsException
+import kr.caredoc.careinsurance.reception.exception.AccidentNumberExistsException
+import kr.caredoc.careinsurance.reception.exception.InsuranceNumberExistsException
 import kr.caredoc.careinsurance.reception.exception.ReceptionNotFoundByIdException
 import kr.caredoc.careinsurance.web.reception.response.EnteredReceptionIdNotRegisteredData
 import kr.caredoc.careinsurance.web.response.GeneralErrorResponse
@@ -33,6 +35,32 @@ class ReceptionNotFoundHandler {
                 errorType = "REFERENCE_RECEPTION_NOT_EXISTS",
                 data = EnteredReceptionIdNotRegisteredData(
                     enteredReceptionId = e.referenceReceptionId
+                ),
+            )
+        )
+
+    @ExceptionHandler(AccidentNumberExistsException::class)
+    fun handleReceptionNotFoundByIdException(e: AccidentNumberExistsException) = ResponseEntity
+        .status(HttpStatus.NOT_FOUND)
+        .body(
+            GeneralErrorResponse(
+                message = "사고번호($e.accidentNumber)는 이미 등록되어 있습니다.",
+                errorType = "ACCIDENT_NUMBER_EXISTS",
+                data = EnteredReceptionIdNotRegisteredData(
+                    enteredReceptionId = e.accidentNumber
+                ),
+            )
+        )
+
+    @ExceptionHandler(InsuranceNumberExistsException::class)
+    fun handleReceptionNotFoundByIdException(e: InsuranceNumberExistsException) = ResponseEntity
+        .status(HttpStatus.NOT_FOUND)
+        .body(
+            GeneralErrorResponse(
+                message = "접수번호($e.insuranceNumber)는 이미 등록되어 있습니다.",
+                errorType = "INSURANCE_NUMBER_EXISTS",
+                data = EnteredReceptionIdNotRegisteredData(
+                    enteredReceptionId = e.insuranceNumber
                 ),
             )
         )

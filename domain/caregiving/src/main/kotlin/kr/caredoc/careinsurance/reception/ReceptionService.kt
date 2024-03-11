@@ -11,10 +11,7 @@ import kr.caredoc.careinsurance.file.FileByUrlQuery
 import kr.caredoc.careinsurance.file.FileByUrlQueryHandler
 import kr.caredoc.careinsurance.file.FileSavingCommand
 import kr.caredoc.careinsurance.file.FileSavingCommandHandler
-import kr.caredoc.careinsurance.reception.exception.InvalidReceptionProgressingStatusTransitionException
-import kr.caredoc.careinsurance.reception.exception.ManagingUserNotFoundException
-import kr.caredoc.careinsurance.reception.exception.ReceptionApplicationNotFoundException
-import kr.caredoc.careinsurance.reception.exception.ReceptionNotFoundByIdException
+import kr.caredoc.careinsurance.reception.exception.*
 import kr.caredoc.careinsurance.security.accesscontrol.Object
 import kr.caredoc.careinsurance.security.accesscontrol.ReadOneAccess
 import kr.caredoc.careinsurance.security.accesscontrol.Subject
@@ -52,6 +49,14 @@ class ReceptionService(
     override fun createReception(@IncludingPersonalData command: ReceptionCreationCommand): ReceptionCreationResult {
         ReceptionAccessPolicy.check(command.subject, command, Object.Empty)
         ensureReferenceCoverageExists(command.insuranceInfo.coverageId, command.subject)
+
+        if (receptionRepository.existsByAccidentInfoAccidentNumber(command.accidentInfo.accidentNumber)) {
+            throw AccidentNumberExistsException(command.accidentInfo.accidentNumber)
+        }
+
+        if (receptionRepository.existsByInsuranceInfoInsuranceNumber(command.insuranceInfo.insuranceNumber)) {
+            throw InsuranceNumberExistsException(command.insuranceInfo.insuranceNumber)
+        }
 
         val entity = command.intoEntity()
         receptionRepository.save(entity)
