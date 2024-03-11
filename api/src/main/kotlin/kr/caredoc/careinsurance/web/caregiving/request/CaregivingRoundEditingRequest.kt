@@ -4,16 +4,17 @@ import kr.caredoc.careinsurance.caregiving.CaregivingProgressingStatus
 import kr.caredoc.careinsurance.caregiving.ClosingReasonType
 import kr.caredoc.careinsurance.patient.Sex
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.OffsetDateTime
 
 data class CaregivingRoundEditingRequest(
-    val caregivingProgressingStatus: CaregivingProgressingStatus,
-    val startDateTime: OffsetDateTime?,
-    val endDateTime: OffsetDateTime?,
-    val caregivingRoundClosingReasonType: ClosingReasonType?,
-    val caregivingRoundClosingReasonDetail: String?,
-    val caregiverInfo: CaregiverInfo? = null,
-    val remarks: String,
+        val caregivingProgressingStatus: CaregivingProgressingStatus,
+        val startDateTime: LocalDateTime?,
+        val endDateTime: LocalDateTime?,
+        val caregivingRoundClosingReasonType: ClosingReasonType?,
+        val caregivingRoundClosingReasonDetail: String?,
+        val caregiverInfo: CaregiverInfo? = null,
+        val remarks: String,
 ) {
     data class CaregiverInfo(
         val caregiverOrganizationId: String?,
