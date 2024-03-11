@@ -2,7 +2,12 @@ package kr.caredoc.careinsurance.settlement.statistics
 
 import jakarta.persistence.Access
 import jakarta.persistence.AccessType
+import jakarta.persistence.Column
+import jakarta.persistence.Embeddable
+import jakarta.persistence.Embedded
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import kr.caredoc.careinsurance.AggregateRoot
 import kr.caredoc.careinsurance.Clock
 import kr.caredoc.careinsurance.settlement.SettlementTransactionRecorded
@@ -14,10 +19,22 @@ import java.time.LocalDateTime
 class DailyCaregivingRoundSettlementTransactionStatistics(
     id: String,
     @Access(AccessType.FIELD)
+    @Column(insertable=false, updatable=false)
     val receptionId: String,
     val caregivingRoundId: String,
     val date: LocalDate,
+    receptionInfo: ReceptionInfo,
 ) : AggregateRoot(id) {
+
+    @Embedded
+    var receptionInfo = receptionInfo
+        protected set
+
+    @Embeddable
+    data class ReceptionInfo(
+        val receptionId: String,
+    )
+
     var totalDepositAmount: Int = 0
         protected set
     var totalWithdrawalAmount: Int = 0

@@ -2,10 +2,12 @@ package kr.caredoc.careinsurance.settlement.statistics
 
 import com.github.guepardoapps.kulid.ULID
 import kr.caredoc.careinsurance.security.accesscontrol.Object
+import kr.caredoc.careinsurance.security.personaldata.IncludingPersonalData
 import kr.caredoc.careinsurance.settlement.SettlementTransactionRecorded
 import kr.caredoc.careinsurance.withSort
 import org.springframework.context.event.EventListener
 import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
@@ -18,7 +20,9 @@ class SettlementStatisticsService(
 ) : DailySettlementTransactionStatisticsByDateQueryHandler,
     DailyCaregivingRoundSettlementTransactionStatisticsByDateQueryHandler {
     @Transactional(readOnly = true)
-    override fun getDailySettlementTransactionStatistics(query: DailySettlementTransactionStatisticsByDateQuery): DailySettlementTransactionStatistics? {
+    override fun getDailySettlementTransactionStatistics(
+        query: DailySettlementTransactionStatisticsByDateQuery
+    ): DailySettlementTransactionStatistics? {
         DailySettlementTransactionStatisticsAccessPolicy.check(query.subject, query, Object.Empty)
 
         val statistics = dailySettlementTransactionStatisticsRepository.findByDate(query.date)
@@ -47,6 +51,9 @@ class SettlementStatisticsService(
                 receptionId = event.receptionId,
                 caregivingRoundId = event.caregivingRoundId,
                 date = event.transactionDate,
+                receptionInfo = DailyCaregivingRoundSettlementTransactionStatistics.ReceptionInfo(
+                    receptionId = event.receptionId
+                )
             )
 
         statistics.handleSettlementTransactionRecorded(event)
@@ -73,14 +80,36 @@ class SettlementStatisticsService(
 
     @Transactional(readOnly = true)
     override fun getDailyCaregivingRoundSettlementTransactionStatistics(
+        @IncludingPersonalData
         query: DailyCaregivingRoundSettlementTransactionStatisticsByDateQuery,
         pageRequest: Pageable,
     ): Page<DailyCaregivingRoundSettlementTransactionStatistics> {
         DailyCaregivingRoundSettlementTransactionStatisticsAccessPolicy.check(query.subject, query, Object.Empty)
 
+        val res = dailyCaregivingRoundSettlementTransactionStatisticsRepository.getDataList(query.intoSearchCriteria(), pageRequest)
+        return res;
+
+        /*
         return dailyCaregivingRoundSettlementTransactionStatisticsRepository.findByDate(
             query.date,
             pageRequest.withSort(Sort.by(Sort.Order.desc(DailyCaregivingRoundSettlementTransactionStatistics::lastEnteredDateTime.name)))
         )
+         */
+    }
+
+    private fun DailyCaregivingRoundSettlementTransactionStatisticsByDateQuery.intoSearchCriteria() =
+        DailyCaregivingRoundSettlementTransactionStatisticsSearchRepository.SearchingCriteria(
+            date = this.date,
+            patientName = this.getKeyword(
+                propertyToExtractionKeyword = DailyCaregivingRoundSettlementTransactionStatisticsByDateQuery.SearchingProperty.PATIENT_NAME
+            ),
+        )
+
+    private fun DailyCaregivingRoundSettlementTransactionStatisticsByDateQuery.getKeyword(
+        propertyToExtractionKeyword: DailyCaregivingRoundSettlementTransactionStatisticsByDateQuery.SearchingProperty
+    ) = if (searchCondition?.searchingProperty == propertyToExtractionKeyword) {
+        searchCondition.keyword
+    } else {
+        null
     }
 }
