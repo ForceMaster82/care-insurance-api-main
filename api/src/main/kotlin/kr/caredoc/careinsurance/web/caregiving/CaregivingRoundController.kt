@@ -226,8 +226,8 @@ class CaregivingRoundController(
 
     private fun CaregivingRoundEditingRequest.intoCommand(subject: Subject) = CaregivingRoundEditingCommand(
         caregivingProgressingStatus = Patches.ofValue(this.caregivingProgressingStatus),
-        startDateTime = this.startDateTime,
-        endDateTime = this.endDateTime,
+        startDateTime = this.startDateTime?.atLocalTimeZone(),
+        endDateTime = this.endDateTime?.atLocalTimeZone(),
         caregivingRoundClosingReasonType = this.caregivingRoundClosingReasonType,
         caregivingRoundClosingReasonDetail = this.caregivingRoundClosingReasonDetail,
         caregiverInfo = this.caregiverInfo?.let {

@@ -9,8 +9,8 @@ import java.time.OffsetDateTime
 
 data class CaregivingRoundEditingRequest(
         val caregivingProgressingStatus: CaregivingProgressingStatus,
-        val startDateTime: LocalDateTime?,
-        val endDateTime: LocalDateTime?,
+        val startDateTime: OffsetDateTime?,
+        val endDateTime: OffsetDateTime?,
         val caregivingRoundClosingReasonType: ClosingReasonType?,
         val caregivingRoundClosingReasonDetail: String?,
         val caregiverInfo: CaregiverInfo? = null,
