@@ -63,6 +63,7 @@ class BillingController(
         mapOf(
             "accidentNumber" to BillingByFilterQuery.SearchingProperty.ACCIDENT_NUMBER,
             "patientName" to BillingByFilterQuery.SearchingProperty.PATIENT_NAME,
+            "caregiverName" to BillingByFilterQuery.SearchingProperty.CAREGIVER_NAME,
         )
     )
 

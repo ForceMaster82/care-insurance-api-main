@@ -80,6 +80,12 @@ class CaregivingSatisfactionSurveyService(
                 patientNameHasher.hashAsHex(query.searchCondition.keyword),
                 pageable,
             )
+
+            CaregivingSatisfactionSurveyStatusSearchQuery.SearchingProperty.CAREGIVER_NAME -> caregivingSatisfactionSurveyStatusRepository.findByExpectedCaregiverNameLike(
+                query.filter.date,
+                query.searchCondition.keyword,
+                pageable,
+            )
         }
     }
 

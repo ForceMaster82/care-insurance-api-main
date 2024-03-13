@@ -89,6 +89,24 @@ interface CaregivingStartMessageSummaryRepository : JpaRepository<CaregivingStar
             JOIN Reception r on r.id = csms.receptionId
             JOIN CaregivingRound cr on cr.id = csms.firstCaregivingRoundId
             WHERE csms.expectedSendingDate = :expectedSendingDate
+                AND cr.caregivingStateData.caregiverInfo.name LIKE %:caregiverName%
+                AND r.notifyCaregivingProgress = true
+                AND cr.caregivingStateData.progressingStatus = "CAREGIVING_IN_PROGRESS"
+        """
+    )
+    fun searchByCaregiverNameLike(
+        expectedSendingDate: LocalDate,
+        caregiverName: String,
+        pageable: Pageable,
+    ): Page<CaregivingStartMessageSummary>
+
+    @Query(
+        """
+            SELECT csms
+            FROM CaregivingStartMessageSummary csms
+            JOIN Reception r on r.id = csms.receptionId
+            JOIN CaregivingRound cr on cr.id = csms.firstCaregivingRoundId
+            WHERE csms.expectedSendingDate = :expectedSendingDate
                 AND csms.sendingStatus = :sendingStatus
                 AND r.accidentInfo.accidentNumber LIKE %:accidentNumberKeyword%
                 AND r.notifyCaregivingProgress = true
@@ -119,6 +137,26 @@ interface CaregivingStartMessageSummaryRepository : JpaRepository<CaregivingStar
         expectedSendingDate: LocalDate,
         sendingStatus: SendingStatus,
         hashedPatientName: String,
+        pageable: Pageable,
+    ): Page<CaregivingStartMessageSummary>
+
+    @Query(
+        """
+            SELECT csms
+            FROM CaregivingStartMessageSummary csms
+            JOIN Reception r on r.id = csms.receptionId
+            JOIN CaregivingRound cr on cr.id = csms.firstCaregivingRoundId
+            WHERE csms.expectedSendingDate = :expectedSendingDate
+                AND csms.sendingStatus = :sendingStatus
+                AND cr.caregivingStateData.caregiverInfo.name LIKE %:caregiverName%
+                AND r.notifyCaregivingProgress = true
+                AND cr.caregivingStateData.progressingStatus = "CAREGIVING_IN_PROGRESS"
+        """
+    )
+    fun searchBySendingStatusCaregiverNameLike(
+        expectedSendingDate: LocalDate,
+        sendingStatus: SendingStatus,
+        caregiverName: String,
         pageable: Pageable,
     ): Page<CaregivingStartMessageSummary>
 

@@ -23,5 +23,6 @@ interface ReceptionSearchingRepository {
         val patientPhoneNumberContains: String? = null,
         val accidentNumberContains: String? = null,
         val managerNameContains: String? = null,
+        val caregiverName: String? = null,
     )
 }

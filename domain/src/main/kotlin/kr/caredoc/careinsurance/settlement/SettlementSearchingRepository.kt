@@ -23,5 +23,6 @@ interface SettlementSearchingRepository {
         val expectedSettlementDate: DateRange? = null,
         val lastTransactionDate: DateRange? = null,
         val internalCaregivingOrganizationAssigned: Boolean? = null,
+        val caregiverName: String? = null,
     )
 }

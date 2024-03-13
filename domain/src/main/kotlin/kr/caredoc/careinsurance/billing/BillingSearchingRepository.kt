@@ -20,5 +20,6 @@ interface BillingSearchingRepository {
         val billingDateUntil: LocalDate?,
         val transactionDateFrom: LocalDate?,
         val transactionDateUntil: LocalDate?,
+        val caregiverName: String? = null,
     )
 }

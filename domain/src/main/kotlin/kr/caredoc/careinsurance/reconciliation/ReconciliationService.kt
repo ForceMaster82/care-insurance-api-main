@@ -67,6 +67,14 @@ class ReconciliationService(
                 pageable = pageRequest,
             )
 
+            OpenReconciliationsByFilterQuery.SearchingProperty.CAREGIVER_NAME -> reconciliationRepository.findBycaregiverNameLike(
+                from = query.from,
+                until = query.until,
+                closingStatus = ClosingStatus.OPEN,
+                caregiverName = query.searchCondition.keyword,
+                pageable = pageRequest,
+            )
+
             OpenReconciliationsByFilterQuery.SearchingProperty.PATIENT_NAME -> reconciliationRepository.findByIssuedDateBetweenAndClosingStatusAndHashedPatientName(
                 from = query.from,
                 until = query.until,
@@ -94,6 +102,13 @@ class ReconciliationService(
                 until = query.until,
                 closingStatus = ClosingStatus.OPEN,
                 accidentNumber = query.searchCondition.keyword,
+            )
+
+            OpenReconciliationsByFilterQuery.SearchingProperty.CAREGIVER_NAME -> reconciliationRepository.findBycaregiverNameLike(
+                from = query.from,
+                until = query.until,
+                closingStatus = ClosingStatus.OPEN,
+                caregiverName = query.searchCondition.keyword,
             )
 
             OpenReconciliationsByFilterQuery.SearchingProperty.PATIENT_NAME -> reconciliationRepository.findByIssuedDateBetweenAndClosingStatusAndHashedPatientName(

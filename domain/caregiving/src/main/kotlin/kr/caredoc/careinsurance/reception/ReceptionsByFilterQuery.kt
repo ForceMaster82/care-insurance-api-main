@@ -29,5 +29,6 @@ data class ReceptionsByFilterQuery(
         CAREGIVING_MANAGER_NAME,
         PATIENT_PHONE_NUMBER,
         ACCIDENT_NUMBER,
+        CAREGIVER_NAME,
     }
 }

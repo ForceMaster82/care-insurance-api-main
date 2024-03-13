@@ -187,7 +187,10 @@ class BillingService(
                 billingDateUntil = query.billingDateUntil,
                 transactionDateFrom = query.transactionDateFrom,
                 transactionDateUntil = query.transactionDateUntil,
-            ),
+                caregiverName = query.getKeyword(
+                    propertyToExtractingKeyword = BillingByFilterQuery.SearchingProperty.CAREGIVER_NAME
+                ),
+        ),
             pageable = pageRequest.withSort(query.sorting),
         )
 

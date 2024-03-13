@@ -50,6 +50,7 @@ class ReconciliationController(
         mapOf(
             "accidentNumber" to OpenReconciliationsByFilterQuery.SearchingProperty.ACCIDENT_NUMBER,
             "patientName" to OpenReconciliationsByFilterQuery.SearchingProperty.PATIENT_NAME,
+            "caregiverName" to OpenReconciliationsByFilterQuery.SearchingProperty.CAREGIVER_NAME,
         )
     )
 

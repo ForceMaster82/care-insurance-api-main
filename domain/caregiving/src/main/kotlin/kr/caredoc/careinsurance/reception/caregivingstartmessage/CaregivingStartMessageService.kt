@@ -81,6 +81,12 @@ class CaregivingStartMessageService(
                     patientNameHasher.hashAsHex(query.searchCondition.keyword),
                     pageRequest.withDefaultSummarySort(),
                 )
+
+                CaregivingStartMessageSummarySearchQuery.SearchingProperty.CAREGIVER_NAME -> caregivingStartMessageSummaryRepository.searchByCaregiverNameLike(
+                    query.filter.date,
+                    query.searchCondition.keyword,
+                    pageRequest.withDefaultSummarySort(),
+                )
             }
         } else {
             when (query.searchCondition.searchingProperty) {
@@ -95,6 +101,13 @@ class CaregivingStartMessageService(
                     query.filter.date,
                     query.filter.sendingStatus,
                     patientNameHasher.hashAsHex(query.searchCondition.keyword),
+                    pageRequest.withDefaultSummarySort(),
+                )
+
+                CaregivingStartMessageSummarySearchQuery.SearchingProperty.CAREGIVER_NAME -> caregivingStartMessageSummaryRepository.searchBySendingStatusCaregiverNameLike(
+                    query.filter.date,
+                    query.filter.sendingStatus,
+                    query.searchCondition.keyword,
                     pageRequest.withDefaultSummarySort(),
                 )
             }

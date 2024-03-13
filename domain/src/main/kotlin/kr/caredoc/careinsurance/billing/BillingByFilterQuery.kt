@@ -27,6 +27,7 @@ class BillingByFilterQuery(
     enum class SearchingProperty {
         PATIENT_NAME,
         ACCIDENT_NUMBER,
+        CAREGIVER_NAME,
     }
 
     enum class Sorting {

@@ -127,6 +127,49 @@ interface ReconciliationRepository : JpaRepository<Reconciliation, String> {
         accidentNumber: String,
     ): List<Reconciliation>
 
+    @Query(
+        """
+            SELECT r
+            FROM Reconciliation r
+            JOIN Reception re ON re.id = r.receptionId
+            JOIN CaregivingRound cr on cr.id = r.caregivingRoundId
+            WHERE
+                r.issuedDate BETWEEN :from AND :until
+                AND r.closingStatus = :closingStatus
+                AND cr.caregivingStateData.caregiverInfo.name LIKE %:caregiverName%
+            ORDER BY re.patientInfo.name.masked ASC, re.accidentInfo.accidentNumber DESC, cr.caregivingRoundNumber DESC
+        """
+    )
+    fun findBycaregiverNameLike(
+        from: LocalDate,
+        until: LocalDate,
+        closingStatus: ClosingStatus,
+        caregiverName: String,
+        pageable: Pageable,
+    ): Page<Reconciliation>
+
+    @Query(
+        """
+            SELECT r
+            FROM Reconciliation r
+            JOIN Reception re ON re.id = r.receptionId
+            JOIN CaregivingRound cr on cr.id = r.caregivingRoundId
+            WHERE
+                r.issuedDate BETWEEN :from AND :until
+                AND r.closingStatus = :closingStatus
+                AND cr.caregivingStateData.caregiverInfo.name LIKE %:caregiverName%
+            ORDER BY re.patientInfo.name.masked ASC, re.accidentInfo.accidentNumber DESC, cr.caregivingRoundNumber DESC
+        """
+    )
+    fun findBycaregiverNameLike(
+        from: LocalDate,
+        until: LocalDate,
+        closingStatus: ClosingStatus,
+        caregiverName: String,
+    ): List<Reconciliation>
+
+
+
     fun findByReconciledYearAndReconciledMonthAndClosingStatusOrderByIdDesc(
         reconciledYear: Int,
         reconciledMonth: Int,

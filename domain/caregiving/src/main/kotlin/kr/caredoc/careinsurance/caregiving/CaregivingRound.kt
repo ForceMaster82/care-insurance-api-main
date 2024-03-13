@@ -195,6 +195,10 @@ class CaregivingRound protected constructor(
     var remarks: String = ""
         protected set
 
+    @Column(insertable=false, updatable=false)
+    var receptionId: String? = ""
+        protected set
+
     @Embeddable
     data class ReceptionInfo(
         val receptionId: String,

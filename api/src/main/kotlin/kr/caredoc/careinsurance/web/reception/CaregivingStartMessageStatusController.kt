@@ -31,6 +31,7 @@ class CaregivingStartMessageStatusController(
         mapOf(
             "accidentNumber" to CaregivingStartMessageSummarySearchQuery.SearchingProperty.ACCIDENT_NUMBER,
             "patientName" to CaregivingStartMessageSummarySearchQuery.SearchingProperty.PATIENT_NAME,
+            "caregiverName" to CaregivingStartMessageSummarySearchQuery.SearchingProperty.CAREGIVER_NAME,
         )
     )
 

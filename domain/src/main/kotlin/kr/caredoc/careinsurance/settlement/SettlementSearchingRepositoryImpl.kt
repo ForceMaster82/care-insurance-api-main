@@ -78,7 +78,35 @@ class SettlementSearchingRepositoryImpl(
                 root,
                 searchingCriteria.lastTransactionDate
             ),
+            generateCaregiverNamePredicate(query, root, searchingCriteria.caregiverName),
         )
+    }
+
+    private fun generateCaregiverNamePredicate(
+        query: CriteriaQuery<*>,
+        root: Root<Settlement>,
+        caregiverName: String?,
+    ): Predicate? {
+        if (caregiverName.isNullOrBlank()) {
+            return null
+        }
+
+        val caregivingRoundIdSubQuery = query.subquery(String::class.java)
+        val caregivingRoundRoot = caregivingRoundIdSubQuery.from(CaregivingRound::class.java)
+
+        caregivingRoundIdSubQuery.select(
+            caregivingRoundRoot.get("id")
+        ).where(
+            criteriaBuilder.like(
+                caregivingRoundRoot.get<CaregivingStateData>(CaregivingRound::caregivingStateData.name)
+                    .get<CaregiverInfo>(CaregivingStateData::caregiverInfo.name)
+                    .get(CaregiverInfo::name.name),
+                "%$caregiverName%"
+            )
+        )
+
+        return root.get<Settlement>(Settlement::caregivingRoundId.name)     // caregivingRoundId
+            .`in`(caregivingRoundIdSubQuery)
     }
 
     private fun generateSettlementProgressingStatusPredicate(

@@ -1,15 +1,6 @@
 package kr.caredoc.careinsurance.billing
 
-import jakarta.persistence.Access
-import jakarta.persistence.AccessType
-import jakarta.persistence.CollectionTable
-import jakarta.persistence.ElementCollection
-import jakarta.persistence.Embeddable
-import jakarta.persistence.Embedded
-import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
-import jakarta.persistence.FetchType
+import jakarta.persistence.*
 import kr.caredoc.careinsurance.AggregateRoot
 import kr.caredoc.careinsurance.Clock
 import kr.caredoc.careinsurance.caregiving.CaregivingChargeModified
@@ -25,6 +16,7 @@ import org.hibernate.annotations.FetchMode
 import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalDateTime
+import kotlin.jvm.Transient
 
 @Entity
 class Billing private constructor(
@@ -81,6 +73,11 @@ class Billing private constructor(
 
     var isCancelAfterArrived: Boolean = isCancelAfterArrived
         protected set
+
+    @Column(insertable=false, updatable=false)
+    var caregivingRoundId: String? = ""
+        protected set
+
 
     @Embeddable
     data class ReceptionInfo(

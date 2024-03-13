@@ -30,6 +30,7 @@ class CaregivingSatisfactionSurveyStatusController(
         mapOf(
             "patientName" to CaregivingSatisfactionSurveyStatusSearchQuery.SearchingProperty.PATIENT_NAME,
             "accidentNumber" to CaregivingSatisfactionSurveyStatusSearchQuery.SearchingProperty.ACCIDENT_NUMBER,
+            "caregiverName" to CaregivingSatisfactionSurveyStatusSearchQuery.SearchingProperty.CAREGIVER_NAME,
         )
     )
 

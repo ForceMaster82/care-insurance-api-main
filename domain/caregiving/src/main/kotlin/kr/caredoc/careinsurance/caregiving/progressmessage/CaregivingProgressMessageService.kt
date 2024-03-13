@@ -67,6 +67,13 @@ class CaregivingProgressMessageService(
                     hashedPatientName = patientNameHasher.hashAsHex(query.searchCondition.keyword),
                     pageable = pageRequest.withSort(DEFAULT_SORT),
                 )
+
+                CaregivingProgressMessageSummariesSearchQuery.SearchingProperty.CAREGIVER_NAME -> caregivingProgressMessageSummaryRepository.getCaregivingProgressCaregiverNameLike(
+                    expectedSendingDate = query.filter.date,
+                    caregiverName = query.searchCondition.keyword,
+                    pageable = pageRequest.withSort(DEFAULT_SORT),
+                )
+
             }
         } else {
             when (query.searchCondition.searchingProperty) {
@@ -81,6 +88,13 @@ class CaregivingProgressMessageService(
                     expectedSendingDate = query.filter.date,
                     sendingStatus = query.filter.sendingStatus,
                     hashedPatientName = patientNameHasher.hashAsHex(query.searchCondition.keyword),
+                    pageable = pageRequest.withSort(DEFAULT_SORT),
+                )
+
+                CaregivingProgressMessageSummariesSearchQuery.SearchingProperty.CAREGIVER_NAME -> caregivingProgressMessageSummaryRepository.getCaregivingProgressSendingStatusCaregiverNameLike(
+                    expectedSendingDate = query.filter.date,
+                    sendingStatus = query.filter.sendingStatus,
+                    caregiverName = query.searchCondition.keyword,
                     pageable = pageRequest.withSort(DEFAULT_SORT),
                 )
             }

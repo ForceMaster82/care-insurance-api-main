@@ -113,6 +113,9 @@ class SettlementService(
                 internalCaregivingOrganizationAssigned = query.internalCaregivingOrganizationAssigned(
                     propertyToExtractionKeyword = SettlementsSearchQuery.SearchingProperty.ORGANIZATION_NAME
                 ),
+                caregiverName = query.getKeyword(
+                    propertyToExtractionKeyword = SettlementsSearchQuery.SearchingProperty.CAREGIVER_NAME
+                ),
             ),
             pageable = pageRequest.withSort(query.sorting)
         )

@@ -5,10 +5,14 @@ import jakarta.persistence.PersistenceContext
 import jakarta.persistence.criteria.CriteriaQuery
 import jakarta.persistence.criteria.Predicate
 import jakarta.persistence.criteria.Root
+import kr.caredoc.careinsurance.caregiving.CaregiverInfo
+import kr.caredoc.careinsurance.caregiving.CaregivingRound
+import kr.caredoc.careinsurance.caregiving.state.CaregivingStateData
 import kr.caredoc.careinsurance.getPagedResult
 import kr.caredoc.careinsurance.patient.EncryptedPatientInfo
 import kr.caredoc.careinsurance.reception.Reception
 import kr.caredoc.careinsurance.security.hash.PepperedHasher
+import kr.caredoc.careinsurance.settlement.Settlement
 import kr.caredoc.careinsurance.toHex
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
@@ -73,7 +77,35 @@ class BillingSearchingRepositoryImpl(
                 searchingCriteria.transactionDateFrom,
                 searchingCriteria.transactionDateUntil
             ),
+            generateCaregiverNamePredicate(query, root, searchingCriteria.caregiverName),
         )
+    }
+
+    private fun generateCaregiverNamePredicate(
+        query: CriteriaQuery<*>,
+        root: Root<Billing>,
+        caregiverName: String?,
+    ): Predicate? {
+        if (caregiverName.isNullOrBlank()) {
+            return null
+        }
+
+        val caregivingRoundIdSubQuery = query.subquery(String::class.java)
+        val caregivingRoundRoot = caregivingRoundIdSubQuery.from(CaregivingRound::class.java)
+
+        caregivingRoundIdSubQuery.select(
+            caregivingRoundRoot.get("id")
+        ).where(
+            criteriaBuilder.like(
+                caregivingRoundRoot.get<CaregivingStateData>(CaregivingRound::caregivingStateData.name)
+                    .get<CaregiverInfo>(CaregivingStateData::caregiverInfo.name)
+                    .get(CaregiverInfo::name.name),
+                "%$caregiverName%"
+            )
+        )
+
+        return root.get<Billing>(Billing::caregivingRoundId.name)     // caregivingRoundId
+            .`in`(caregivingRoundIdSubQuery)
     }
 
     private fun generatePatientNamePredicate(

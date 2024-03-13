@@ -3,8 +3,12 @@ package kr.caredoc.careinsurance.reception
 import jakarta.persistence.EntityManager
 import jakarta.persistence.PersistenceContext
 import jakarta.persistence.criteria.CriteriaQuery
+import jakarta.persistence.criteria.Predicate
 import jakarta.persistence.criteria.Root
 import jakarta.persistence.criteria.Subquery
+import kr.caredoc.careinsurance.caregiving.CaregiverInfo
+import kr.caredoc.careinsurance.caregiving.CaregivingRound
+import kr.caredoc.careinsurance.caregiving.state.CaregivingStateData
 import kr.caredoc.careinsurance.getPagedResult
 import kr.caredoc.careinsurance.insurance.InsuranceInfo
 import kr.caredoc.careinsurance.patient.EncryptedPatientInfo
@@ -78,8 +82,36 @@ class ReceptionSearchingRepositoryImpl(
             generatePatientNamePredicate(root, patientNameContains),
             generatePatientPhoneNumberPredicate(root, patientPhoneNumberContains),
             generateAccidentNumberPredicate(root, accidentNumberContains),
-            generateManagerNamePredicate(query, root, managerNameContains)
+            generateManagerNamePredicate(query, root, managerNameContains),
+            generateCaregiverNamePredicate(query, root, caregiverName),
         )
+    }
+
+    private fun generateCaregiverNamePredicate(
+      query: CriteriaQuery<*>,
+      root: Root<Reception>,
+      caregiverName: String?,
+    ): Predicate? {
+        if (caregiverName.isNullOrBlank()) {
+            return null
+        }
+
+        val receptionIdSubQuery = query.subquery(String::class.java)
+        val caregivingRoundRoot = receptionIdSubQuery.from(CaregivingRound::class.java)
+
+        receptionIdSubQuery.select(
+            caregivingRoundRoot.get("receptionId")
+        ).where(
+            criteriaBuilder.like(
+                caregivingRoundRoot.get<CaregivingStateData>(CaregivingRound::caregivingStateData.name)
+                    .get<CaregiverInfo>(CaregivingStateData::caregiverInfo.name)
+                    .get(CaregiverInfo::name.name),
+                "%$caregiverName%"
+            )
+        )
+
+        return root.get<Reception>("id")
+            .`in`(receptionIdSubQuery)
     }
 
     private fun generateReceivedDateTimePredicate(

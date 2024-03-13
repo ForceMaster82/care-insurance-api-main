@@ -50,6 +50,7 @@ class SettlementController(
             "accidentNumber" to SettlementsSearchQuery.SearchingProperty.ACCIDENT_NUMBER,
             "patientName" to SettlementsSearchQuery.SearchingProperty.PATIENT_NAME,
             "organizationName" to SettlementsSearchQuery.SearchingProperty.ORGANIZATION_NAME,
+            "caregiverName" to SettlementsSearchQuery.SearchingProperty.CAREGIVER_NAME,
         )
     )
 

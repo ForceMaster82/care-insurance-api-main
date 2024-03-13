@@ -23,6 +23,7 @@ data class SettlementsSearchQuery(
         ACCIDENT_NUMBER,
         PATIENT_NAME,
         ORGANIZATION_NAME,
+        CAREGIVER_NAME,
     }
 
     enum class Sorting {

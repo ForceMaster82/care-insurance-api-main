@@ -67,6 +67,7 @@ class ReceptionController(
             "caregivingManagerName" to ReceptionsByFilterQuery.SearchingProperty.CAREGIVING_MANAGER_NAME,
             "patientPhoneNumber" to ReceptionsByFilterQuery.SearchingProperty.PATIENT_PHONE_NUMBER,
             "accidentNumber" to ReceptionsByFilterQuery.SearchingProperty.ACCIDENT_NUMBER,
+            "caregiverName" to ReceptionsByFilterQuery.SearchingProperty.CAREGIVER_NAME,
         )
     )
 

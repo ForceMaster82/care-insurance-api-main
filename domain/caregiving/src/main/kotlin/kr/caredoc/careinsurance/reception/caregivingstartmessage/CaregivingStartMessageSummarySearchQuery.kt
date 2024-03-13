@@ -19,5 +19,6 @@ data class CaregivingStartMessageSummarySearchQuery(
     enum class SearchingProperty {
         ACCIDENT_NUMBER,
         PATIENT_NAME,
+        CAREGIVER_NAME,
     }
 }
