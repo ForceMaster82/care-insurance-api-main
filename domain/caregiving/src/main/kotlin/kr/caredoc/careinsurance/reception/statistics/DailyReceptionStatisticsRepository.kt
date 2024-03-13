@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query
 import java.time.LocalDate
 
 interface DailyReceptionStatisticsRepository : JpaRepository<DailyReceptionStatistics, String> {
-    fun findByReceivedDateBetweenOrderByReceivedDate(from: LocalDate, until: LocalDate): List<DailyReceptionStatistics>
+    fun findByReceivedDateBetweenOrderByReceivedDate(from: LocalDate?, until: LocalDate?): List<DailyReceptionStatistics>
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query(

@@ -8,8 +8,8 @@ import kr.caredoc.careinsurance.security.accesscontrol.Subject
 import java.time.LocalDate
 
 data class ReceptionsByFilterQuery(
-    val from: LocalDate,
-    val until: LocalDate,
+    val from: LocalDate?,
+    val until: LocalDate?,
     val urgency: Reception.Urgency?,
     val periodType: Reception.PeriodType?,
     val caregivingManagerAssigned: Boolean?,

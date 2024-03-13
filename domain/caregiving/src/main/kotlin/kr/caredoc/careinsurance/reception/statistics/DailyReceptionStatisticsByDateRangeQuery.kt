@@ -7,8 +7,8 @@ import kr.caredoc.careinsurance.security.accesscontrol.Subject
 import java.time.LocalDate
 
 data class DailyReceptionStatisticsByDateRangeQuery(
-    val from: LocalDate,
-    val until: LocalDate,
+    val from: LocalDate?,
+    val until: LocalDate?,
     val subject: Subject,
 ) : Action {
     override fun get(attribute: ActionAttribute) = when (attribute) {

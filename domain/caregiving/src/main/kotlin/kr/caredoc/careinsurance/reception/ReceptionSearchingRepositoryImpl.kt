@@ -116,19 +116,23 @@ class ReceptionSearchingRepositoryImpl(
 
     private fun generateReceivedDateTimePredicate(
         root: Root<Reception>,
-        from: LocalDate,
-        until: LocalDate,
-    ) =
+        from: LocalDate?,
+        until: LocalDate?,
+    ) = if (from != null && until != null) {
         criteriaBuilder.and(
-            criteriaBuilder.greaterThanOrEqualTo(
-                root.get(Reception::receivedDateTime.name),
-                from.atTime(0, 0, 0),
-            ),
-            criteriaBuilder.lessThan(
-                root.get(Reception::receivedDateTime.name),
-                until.plusDays(1).atTime(0, 0, 0),
-            ),
+                criteriaBuilder.greaterThanOrEqualTo(
+                        root.get(Reception::receivedDateTime.name),
+                        from.atTime(0, 0, 0),
+                ),
+                criteriaBuilder.lessThan(
+                        root.get(Reception::receivedDateTime.name),
+                        until.plusDays(1).atTime(0, 0, 0),
+                ),
         )
+    } else {
+        null
+    }
+
 
     private fun generateUrgencyPredicate(
         root: Root<Reception>,

@@ -11,14 +11,14 @@ interface ReceptionSearchingRepository {
     ): Page<Reception>
 
     data class SearchingCriteria(
-        val from: LocalDate,
-        val until: LocalDate,
+        val from: LocalDate? = null,
+        val until: LocalDate? = null,
         val urgency: Reception.Urgency? = null,
         val periodType: Reception.PeriodType? = null,
         val caregivingManagerAssigned: Boolean? = null,
         val organizationType: OrganizationType? = null,
         val progressingStatuses: Collection<ReceptionProgressingStatus> = setOf(),
-        val insuranceNumberContains: String?,
+        val insuranceNumberContains: String? = null,
         val patientNameContains: String? = null,
         val patientPhoneNumberContains: String? = null,
         val accidentNumberContains: String? = null,
