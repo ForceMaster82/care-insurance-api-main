@@ -31,5 +31,7 @@ interface CaregivingRoundSearchingRepository {
         val patientName: String? = null,
         val caregiverName: String? = null,
         val receptionReceivedDateFrom: LocalDate,
+        val patientPhoneNumberContains: String? = null,
+        val hospitalAndRoom: String? = null,
     )
 }

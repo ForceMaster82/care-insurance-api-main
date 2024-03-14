@@ -83,6 +83,8 @@ class CaregivingRoundController(
             "insuranceNumber" to CaregivingRoundsByFilterQuery.SearchingProperty.INSURANCE_NUMBER,
             "patientName" to CaregivingRoundsByFilterQuery.SearchingProperty.PATIENT_NAME,
             "caregiverName" to CaregivingRoundsByFilterQuery.SearchingProperty.CAREGIVER_NAME,
+            "hospitalAndRoom" to CaregivingRoundsByFilterQuery.SearchingProperty.HOSPITAL_AND_ROOM,
+            "patientPhoneNumber" to CaregivingRoundsByFilterQuery.SearchingProperty.PATIENT_PHONE_NUMBER,
         )
     )
 

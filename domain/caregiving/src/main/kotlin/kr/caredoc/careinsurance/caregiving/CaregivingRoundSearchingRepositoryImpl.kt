@@ -81,20 +81,89 @@ class CaregivingRoundSearchingRepositoryImpl(
         query: CriteriaQuery<*>,
         searchingCriteria: CaregivingRoundSearchingRepository.SearchingCriteria,
     ) = with(searchingCriteria) {
-        listOfNotNull(
-            generateStartDateTimePredicate(root, caregivingStartDateFrom, caregivingStartDateUntil),
-            generateOrganizationIdPredicate(root, organizationId),
-            generateExpectedCaregivingStartDateTimePredicate(root, expectedCaregivingStartDate),
-            generateReceptionProgressingStatusPredicate(root, receptionProgressingStatuses),
-            generateCaregivingProgressingStatusPredicate(root, caregivingProgressingStatuses),
-            generateSettlementProgressingStatusPredicate(root, settlementProgressingStatuses),
-            generateBillingProgressingStatusPredicate(root, billingProgressingStatuses),
-            generateInsuranceNumberPredicate(root, insuranceNumberContains),
-            generatePatientNamePredicate(root, query, patientName),
-            generateCaregiverNamePredicate(root, caregiverName),
-            generateAccidentNumberPredicate(root, accidentNumberContains),
-            generateReceptionReceivedDateTimePredicate(query, root, receptionReceivedDateFrom.atTime(0, 0, 0))
+        if (!insuranceNumberContains.isNullOrEmpty()
+            || !accidentNumberContains.isNullOrEmpty()
+            || !patientName.isNullOrEmpty()
+            || !caregiverName.isNullOrEmpty()
+            || !hospitalAndRoom.isNullOrEmpty()
+            || !patientPhoneNumberContains.isNullOrEmpty()) {
+
+            listOfNotNull(
+                generateInsuranceNumberPredicate(root, insuranceNumberContains),
+                generateAccidentNumberPredicate(root, accidentNumberContains),
+                generatePatientNamePredicate(root, query, patientName),
+                generateCaregiverNamePredicate(root, caregiverName),
+                generateHospitalAndRoomPredicate(query, root, hospitalAndRoom),
+                generatePatientPhoneNumberPredicate(query, root, patientPhoneNumberContains),
+            )
+        } else {
+            listOfNotNull(
+                generateStartDateTimePredicate(root, caregivingStartDateFrom, caregivingStartDateUntil),
+                generateOrganizationIdPredicate(root, organizationId),
+                generateExpectedCaregivingStartDateTimePredicate(root, expectedCaregivingStartDate),
+                generateReceptionProgressingStatusPredicate(root, receptionProgressingStatuses),
+                generateCaregivingProgressingStatusPredicate(root, caregivingProgressingStatuses),
+                generateSettlementProgressingStatusPredicate(root, settlementProgressingStatuses),
+                generateBillingProgressingStatusPredicate(root, billingProgressingStatuses),
+                generateReceptionReceivedDateTimePredicate(query, root, receptionReceivedDateFrom.atTime(0, 0, 0))
+            )
+        }
+    }
+
+    private fun generateHospitalAndRoomPredicate(
+        query: CriteriaQuery<*>,
+        root: Root<CaregivingRound>,
+        hospitalAndRoom: String?,
+    ): Predicate? {
+        if (hospitalAndRoom.isNullOrBlank()) {
+            return null
+        }
+
+        val receptionIdSubQuery = query.subquery(String::class.java)
+        val receptionRoot = receptionIdSubQuery.from(Reception::class.java)
+
+        receptionIdSubQuery.select(
+            receptionRoot.get("id")
+        ).where(
+            criteriaBuilder.like(
+                receptionRoot.get<AccidentInfo>(Reception::accidentInfo.name)
+                    .get<AccidentInfo.HospitalAndRoomInfo>(AccidentInfo::hospitalAndRoomInfo.name)
+                    .get(AccidentInfo.HospitalAndRoomInfo::hospitalAndRoom.name),
+                "%$hospitalAndRoom%",
+            )
         )
+
+        return root.get<CaregivingRound.ReceptionInfo>(CaregivingRound::receptionInfo.name)
+            .get<String>(CaregivingRound.ReceptionInfo::receptionId.name)
+            .`in`(receptionIdSubQuery)
+    }
+
+    private fun generatePatientPhoneNumberPredicate(
+        query: CriteriaQuery<*>,
+        root: Root<CaregivingRound>,
+        patientPhoneNumberKeyword: String?,
+    ): Predicate? {
+        if (patientPhoneNumberKeyword.isNullOrBlank()) {
+            return null
+        }
+
+        val receptionIdSubQuery = query.subquery(String::class.java)
+        val receptionRoot = receptionIdSubQuery.from(Reception::class.java)
+
+        receptionIdSubQuery.select(
+            receptionRoot.get("id")
+        ).where(
+            criteriaBuilder.like(
+                receptionRoot.get<EncryptedPatientInfo>(Reception::patientInfo.name)
+                    .get<EncryptedPatientInfo.EncryptedContact>(EncryptedPatientInfo::primaryContact.name)
+                    .get(EncryptedPatientInfo.EncryptedContact::maskedPhoneNumber.name),
+                "%$patientPhoneNumberKeyword%",
+            )
+        )
+
+        return root.get<CaregivingRound.ReceptionInfo>(CaregivingRound::receptionInfo.name)
+            .get<String>(CaregivingRound.ReceptionInfo::receptionId.name)
+            .`in`(receptionIdSubQuery)
     }
 
     private fun generateCaregiverNamePredicate(
