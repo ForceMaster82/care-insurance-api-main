@@ -20,7 +20,7 @@ import java.time.LocalDateTime
 class DailyReceptionStatistics(
     id: String,
     @Access(AccessType.FIELD)
-    val receivedDate: LocalDate,
+    var receivedDate: LocalDate,
 ) : AggregateRoot(id) {
     companion object {
         val STARTED_RECEPTION_STATUSES = setOf(

@@ -23,7 +23,33 @@ class ReceptionStatisticsService(
     override fun getDailyReceptionStatistics(query: DailyReceptionStatisticsByDateRangeQuery): List<DailyReceptionStatistics> {
         DailyReceptionStatisticsAccessPolicy.check(query.subject, query, Object.Empty)
 
-        return dailyReceptionStatisticsRepository.findByReceivedDateBetweenOrderByReceivedDate(query.from, query.until)
+        val resList: List<DailyReceptionStatistics> = dailyReceptionStatisticsRepository.findByReceivedDateBetweenOrderByReceivedDate(query.from, query.until)
+        var dayList: MutableList<DailyReceptionStatistics> = arrayListOf()
+
+        LocalDate.parse(query.from.toString())
+                .datesUntil(LocalDate.parse(query.until.toString()).plusDays(1))
+                .forEach{
+                    var drs = DailyReceptionStatistics("1", it)
+                    dayList.add(drs)
+
+        }
+        resList.forEach{
+            var idx : Int = getIndex(it.receivedDate, dayList)
+            dayList.set(idx, it)
+        }
+
+        return dayList
+    }
+
+    fun getIndex(receivedDate:LocalDate, dayList:MutableList<DailyReceptionStatistics>): Int {
+        var i : Int = 0
+        dayList.forEach {
+            if(it.receivedDate == receivedDate){
+                return i
+            }
+            i++
+        }
+        return 0
     }
 
     @Transactional(readOnly = true)
