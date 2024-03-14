@@ -197,6 +197,12 @@ class CaregivingRoundService(
             caregiverName = this.getKeyword(
                 propertyToExtractionKeyword = CaregivingRoundsByFilterQuery.SearchingProperty.CAREGIVER_NAME
             ),
+            hospitalAndRoom = this.getKeyword(
+                propertyToExtractionKeyword = CaregivingRoundsByFilterQuery.SearchingProperty.HOSPITAL_AND_ROOM
+            ),
+            patientPhoneNumberContains = this.getKeyword(
+                propertyToExtractionKeyword = CaregivingRoundsByFilterQuery.SearchingProperty.PATIENT_PHONE_NUMBER
+            ),
         )
 
     private fun CaregivingRoundsByFilterQuery.getKeyword(

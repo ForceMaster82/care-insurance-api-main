@@ -34,5 +34,7 @@ data class CaregivingRoundsByFilterQuery(
         INSURANCE_NUMBER,
         PATIENT_NAME,
         CAREGIVER_NAME,
+        HOSPITAL_AND_ROOM,
+        PATIENT_PHONE_NUMBER,
     }
 }
