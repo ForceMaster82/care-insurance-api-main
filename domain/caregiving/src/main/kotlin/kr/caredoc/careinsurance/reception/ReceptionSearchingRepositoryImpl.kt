@@ -62,29 +62,52 @@ class ReceptionSearchingRepositoryImpl(
         root: Root<Reception>,
         searchingCriteria: ReceptionSearchingRepository.SearchingCriteria,
     ) = with(searchingCriteria) {
-        listOfNotNull(
-            generateReceivedDateTimePredicate(root, from, until),
-            periodType?.let {
-                criteriaBuilder.equal(
-                    root.get<Reception.PeriodType>(Reception::periodType.name),
-                    periodType,
-                )
-            },
-            generateUrgencyPredicate(root, urgency),
-            generateCaregivingManagerAssigned(root, caregivingManagerAssigned),
-            if (caregivingManagerAssigned != false) {
-                generateOrganizationTypePredicate(root, organizationType)
-            } else {
-                null
-            },
-            generateProgressingStatusPredicate(root, progressingStatuses),
-            generateInsuranceNumberPredicate(root, insuranceNumberContains),
-            generatePatientNamePredicate(root, patientNameContains),
-            generatePatientPhoneNumberPredicate(root, patientPhoneNumberContains),
-            generateAccidentNumberPredicate(root, accidentNumberContains),
-            generateManagerNamePredicate(query, root, managerNameContains),
-            generateCaregiverNamePredicate(query, root, caregiverName),
+        if (!insuranceNumberContains.isNullOrEmpty()
+            || !accidentNumberContains.isNullOrEmpty()
+            || !patientNameContains.isNullOrEmpty()
+            || !caregiverName.isNullOrEmpty()
+            || !hospitalAndRoom.isNullOrEmpty()
+            || !patientPhoneNumberContains.isNullOrEmpty()
+            || caregivingManagerAssigned == true
+        ) {
+            listOfNotNull(
+                generateInsuranceNumberPredicate(root, insuranceNumberContains),
+                generateAccidentNumberPredicate(root, accidentNumberContains),
+                generatePatientNamePredicate(root, patientNameContains),
+                generateCaregiverNamePredicate(query, root, caregiverName),
+                generateHospitalAndRoomPredicate(root, hospitalAndRoom),
+                generatePatientPhoneNumberPredicate(root, patientPhoneNumberContains),
+                generateCaregivingManagerAssigned(root, caregivingManagerAssigned),
+                if (caregivingManagerAssigned != false) generateOrganizationTypePredicate(root, organizationType) else null
+            )
+        } else {
+            listOfNotNull(
+                generateReceivedDateTimePredicate(root, from, until),
+                periodType?.let {
+                    criteriaBuilder.equal(
+                        root.get<Reception.PeriodType>(Reception::periodType.name),
+                        periodType,
+                    )
+                },
+                generateUrgencyPredicate(root, urgency),
+                generateProgressingStatusPredicate(root, progressingStatuses),
+                generateManagerNamePredicate(query, root, managerNameContains),
+            )
+        }
+    }
+
+    private fun generateHospitalAndRoomPredicate(
+        root: Root<Reception>,
+        hospitalAndRoom: String?,
+    ) = if (!hospitalAndRoom.isNullOrBlank()) {
+        criteriaBuilder.like(
+            root.get<AccidentInfo>(Reception::accidentInfo.name)
+                .get<AccidentInfo.HospitalAndRoomInfo>(AccidentInfo::hospitalAndRoomInfo.name)
+                .get(AccidentInfo.HospitalAndRoomInfo::hospitalAndRoom.name),
+            "%$hospitalAndRoom%",
         )
+    } else {
+        null
     }
 
     private fun generateCaregiverNamePredicate(

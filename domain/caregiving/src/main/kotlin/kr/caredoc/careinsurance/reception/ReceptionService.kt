@@ -137,6 +137,9 @@ class ReceptionService(
         caregiverName = this.getKeyword(
             propertyToExtractionKeyword = ReceptionsByFilterQuery.SearchingProperty.CAREGIVER_NAME
         ),
+        hospitalAndRoom = this.getKeyword(
+            propertyToExtractionKeyword = ReceptionsByFilterQuery.SearchingProperty.HOSPITAL_AND_ROOM
+        ),
     )
 
     private fun ReceptionsByFilterQuery.getKeyword(

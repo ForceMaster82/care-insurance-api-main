@@ -30,5 +30,6 @@ data class ReceptionsByFilterQuery(
         PATIENT_PHONE_NUMBER,
         ACCIDENT_NUMBER,
         CAREGIVER_NAME,
+        HOSPITAL_AND_ROOM,
     }
 }
