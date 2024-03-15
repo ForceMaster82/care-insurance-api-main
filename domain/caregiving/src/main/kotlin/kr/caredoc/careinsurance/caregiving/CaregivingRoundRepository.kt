@@ -25,7 +25,7 @@ interface CaregivingRoundRepository : JpaRepository<CaregivingRound, String>, Ca
         """
             SELECT new kr.caredoc.careinsurance.caregiving.MonthlyRegionalCaregivingStatistics(
                 r.accidentInfo.hospitalAndRoomInfo.state,
-                r.accidentInfo.hospitalAndRoomInfo.city,
+                '',
                 COUNT(DISTINCT r.id)
             )
             FROM CaregivingRound cr
@@ -35,8 +35,7 @@ interface CaregivingRoundRepository : JpaRepository<CaregivingRound, String>, Ca
                 AND cr.caregivingStateData.startDateTime >= :from
                 AND r.accidentInfo.hospitalAndRoomInfo.state != null 
             GROUP BY
-                r.accidentInfo.hospitalAndRoomInfo.state,
-                r.accidentInfo.hospitalAndRoomInfo.city
+                r.accidentInfo.hospitalAndRoomInfo.state
         """
     )
     fun getCaregivingStatisticsByPeriodIntersect(
@@ -101,7 +100,7 @@ interface CaregivingRoundRepository : JpaRepository<CaregivingRound, String>, Ca
         """
             SELECT new kr.caredoc.careinsurance.caregiving.MonthlyRegionalCaregivingStatistics(
                 r.accidentInfo.hospitalAndRoomInfo.state,
-                r.accidentInfo.hospitalAndRoomInfo.city,
+                '',
                 COUNT(DISTINCT r.id)
             )
             FROM CaregivingRound cr
@@ -111,8 +110,7 @@ interface CaregivingRoundRepository : JpaRepository<CaregivingRound, String>, Ca
                 AND cr.caregivingStateData.startDateTime >= :from
                 AND r.accidentInfo.hospitalAndRoomInfo.state != null 
             GROUP BY
-                r.accidentInfo.hospitalAndRoomInfo.state,
-                r.accidentInfo.hospitalAndRoomInfo.city
+                r.accidentInfo.hospitalAndRoomInfo.state
         """
     )
     fun getCaregivingStatisticsByPeriodIntersect(
