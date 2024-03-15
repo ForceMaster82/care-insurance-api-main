@@ -1,6 +1,7 @@
 package kr.caredoc.careinsurance.caregiving
 
 import kr.caredoc.careinsurance.billing.BillingProgressingStatus
+import kr.caredoc.careinsurance.reception.Reception
 import kr.caredoc.careinsurance.reception.ReceptionProgressingStatus
 import kr.caredoc.careinsurance.search.SearchCondition
 import kr.caredoc.careinsurance.security.accesscontrol.Action
@@ -21,6 +22,7 @@ data class CaregivingRoundsByFilterQuery(
     val billingProgressingStatuses: Set<BillingProgressingStatus>,
     val searchCondition: SearchCondition<SearchingProperty>?,
     val subject: Subject,
+    val notifyCaregivingProgress: Boolean?,
 ) : Action {
 
     override fun get(attribute: ActionAttribute) = when (attribute) {

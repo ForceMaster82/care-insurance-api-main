@@ -203,6 +203,7 @@ class CaregivingRoundService(
             patientPhoneNumberContains = this.getKeyword(
                 propertyToExtractionKeyword = CaregivingRoundsByFilterQuery.SearchingProperty.PATIENT_PHONE_NUMBER
             ),
+            notifyCaregivingProgress = this.notifyCaregivingProgress,
         )
 
     private fun CaregivingRoundsByFilterQuery.getKeyword(

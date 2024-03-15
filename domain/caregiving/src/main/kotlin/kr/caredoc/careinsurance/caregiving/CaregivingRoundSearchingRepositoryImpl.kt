@@ -105,7 +105,8 @@ class CaregivingRoundSearchingRepositoryImpl(
                 generateCaregivingProgressingStatusPredicate(root, caregivingProgressingStatuses),
                 generateSettlementProgressingStatusPredicate(root, settlementProgressingStatuses),
                 generateBillingProgressingStatusPredicate(root, billingProgressingStatuses),
-                generateReceptionReceivedDateTimePredicate(query, root, receptionReceivedDateFrom.atTime(0, 0, 0))
+                generateReceptionReceivedDateTimePredicate(query, root, receptionReceivedDateFrom.atTime(0, 0, 0)),
+                generateNotifyPredicate(query,root, notifyCaregivingProgress),
             )
         }
     }
@@ -350,4 +351,30 @@ class CaregivingRoundSearchingRepositoryImpl(
             .get<String>(CaregivingRound.ReceptionInfo::receptionId.name)
             .`in`(receptionIdSubQuery)
     }
+
+    private fun generateNotifyPredicate(
+            query: CriteriaQuery<*>,
+            root: Root<CaregivingRound>,
+            notifyCaregivingProgress: Boolean?,
+    ): Predicate? {
+        if (notifyCaregivingProgress != false) {
+            return null
+        }
+
+        val receptionIdSubQuery = query.subquery(String::class.java)
+        val receptionRoot = receptionIdSubQuery.from(Reception::class.java)
+
+        receptionIdSubQuery.select(
+                receptionRoot.get("id")
+        ).where(
+                criteriaBuilder.equal(
+                        receptionRoot.get<Reception>(Reception::notifyCaregivingProgress.name),
+                        notifyCaregivingProgress
+                )
+        )
+        return root.get<CaregivingRound.ReceptionInfo>(CaregivingRound::receptionInfo.name)
+                .get<String>(CaregivingRound.ReceptionInfo::receptionId.name)
+                .`in`(receptionIdSubQuery)
+    }
+
 }

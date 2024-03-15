@@ -63,6 +63,7 @@ class OrganizationCaregivingRoundController(
         ) settlementStatuses: Set<SettlementProgressingStatus>,
         @RequestParam("billing-progressing-status", defaultValue = "") billingStatuses: Set<BillingProgressingStatus>,
         @RequestParam("query", required = false) query: String?,
+        @RequestParam("notify", required = false) notifyCaregivingProgress: Boolean?,
         subject: Subject,
     ): ResponseEntity<PagedResponse<SimpleCaregivingRoundResponse>> {
         val caregivingRounds = caregivingRoundsByFilterQueryHandler.getCaregivingRounds(
@@ -77,6 +78,7 @@ class OrganizationCaregivingRoundController(
                 billingProgressingStatuses = billingStatuses,
                 searchCondition = query?.let { queryParser.parse(it) },
                 subject = subject,
+                notifyCaregivingProgress = notifyCaregivingProgress,
             ),
             pageRequest = pagingRequest.intoPageable(),
         )
@@ -121,6 +123,7 @@ class OrganizationCaregivingRoundController(
         ) settlementStatuses: Set<SettlementProgressingStatus>,
         @RequestParam("billing-progressing-status", defaultValue = "") billingStatuses: Set<BillingProgressingStatus>,
         @RequestParam("query", required = false) query: String?,
+        @RequestParam("notify", required = false) notifyCaregivingProgress: Boolean?,
         subject: Subject,
     ): ResponseEntity<ByteArray> {
         val caregivingRounds = caregivingRoundsByFilterQueryHandler.getCaregivingRoundsAsCsv(
@@ -135,6 +138,7 @@ class OrganizationCaregivingRoundController(
                 billingProgressingStatuses = billingStatuses,
                 searchCondition = query?.let { queryParser.parse(it) },
                 subject = subject,
+                notifyCaregivingProgress = notifyCaregivingProgress,
             )
         )
 
