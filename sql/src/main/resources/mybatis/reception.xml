@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="caredoc.reception">
+
+	<select id="one" parameterType="string" resultType="hashmap">
+		select *
+		from reception
+		<where>
+			id = #{receptionId}
+		</where>
+	</select>
+
+	<select id="list" parameterType="string" resultType="hashmap">
+		select *
+		from reception
+	</select>
+
+</mapper>

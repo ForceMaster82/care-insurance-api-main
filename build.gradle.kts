@@ -97,6 +97,8 @@ allprojects {
         implementation("ch.qos.logback.contrib:logback-jackson:0.1.5")
         implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")
 
+        implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1")
+
         runtimeOnly("com.h2database:h2")
         runtimeOnly("com.mysql:mysql-connector-j")
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")

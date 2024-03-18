@@ -24,8 +24,12 @@ spring:
   profiles:
     active: local
 
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml
+
 logging:
   level:
+    caredoc: debug
     org.hibernate.SQL: debug
     org.hibernate.orm.jdbc.bind: trace
     root: info

@@ -18,8 +18,8 @@ data class CaregiverInfo(
     val sex: Sex,
     val birthDate: String? = null,
     val phoneNumber: String,
-    val dailyCaregivingCharge: Int,
-    val commissionFee: Int,
-    val insured: Boolean,
+    val dailyCaregivingCharge: Int = 0,
+    val commissionFee: Int = 0,
+    val insured: Boolean = false,
     val accountInfo: AccountInfo,
 )

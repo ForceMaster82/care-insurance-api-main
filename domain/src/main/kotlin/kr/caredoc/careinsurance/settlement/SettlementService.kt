@@ -234,13 +234,14 @@ class SettlementService(
             caregiverOrganizationName: String,
         ) = records.add(
             SettlementCsvRecordData(
-                bank = caregivingRound.caregiverInfo?.accountInfo?.bank ?: "-",
-                accountNumber = caregivingRound.caregiverInfo?.accountInfo?.accountNumber ?: "-",
+                bank = caregivingRound.caregiverInfo?.accountInfo?.bank ?: "-".replace("\\r\\n|\\r|\\n|\\n\\r".toRegex(),"").replace(",", "/"),
+                accountNumber = caregivingRound.caregiverInfo?.accountInfo?.accountNumber ?: "-".replace("\\r\\n|\\r|\\n|\\n\\r".toRegex(),"").replace(",", "/"),
                 totalAmount = settlement.totalAmount,
-                accountHolder = caregivingRound.caregiverInfo?.accountInfo?.accountHolder ?: "-",
-                patientName = patientName,
-                caregiverName = caregivingRound.caregiverInfo?.name ?: "-",
-                caregiverOrganizationName = caregiverOrganizationName,
+                accountHolder = caregivingRound.caregiverInfo?.accountInfo?.accountHolder ?: "-".replace("\\r\\n|\\r|\\n|\\n\\r".toRegex(),"").replace(",", "/"),
+                patientName = patientName.replace("\\r\\n|\\r|\\n|\\n\\r".toRegex(),"").replace(",", "/"),
+                caregiverName = caregivingRound.caregiverInfo?.name ?: "-".replace("\\r\\n|\\r|\\n|\\n\\r".toRegex(),"").replace(",", "/"),
+                remarks = caregivingRound.remarks.replace("\\r\\n|\\r|\\n|\\n\\r".toRegex(),"").replace(",", "/"),
+                caregiverOrganizationName = caregiverOrganizationName.replace("\\r\\n|\\r|\\n|\\n\\r".toRegex(),"").replace(",", "/"),
             )
         )
 

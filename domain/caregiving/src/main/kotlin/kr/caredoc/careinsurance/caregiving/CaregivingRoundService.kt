@@ -154,11 +154,11 @@ class CaregivingRoundService(
         ) = records.add(
 
             CaregivingRoundCsvRecordData(
-                expectedCaregivingStartDate = if (caregivingRound.receptionInfo.expectedCaregivingStartDate == null) { "-" } else { caregivingRound.receptionInfo.expectedCaregivingStartDate.toString() },
-                hospitalAndRoomInfo = hospitalAndRoomInfo,
-                patientName = patientName,
-                caregiverName = caregivingRound.caregiverInfo?.name ?: "-",
-                managerOrganizationName = managerOrganizationName,
+                expectedCaregivingStartDate = if (caregivingRound.receptionInfo.expectedCaregivingStartDate == null) { "-" } else { caregivingRound.receptionInfo.expectedCaregivingStartDate.toString().replace("\\r\\n|\\r|\\n|\\n\\r".toRegex(),"").replace(",", "/") },
+                hospitalAndRoomInfo = hospitalAndRoomInfo.replace("\\r\\n|\\r|\\n|\\n\\r".toRegex(),"").replace(",", "/"),
+                patientName = patientName.replace("\\r\\n|\\r|\\n|\\n\\r".toRegex(),"").replace(",", "/"),
+                caregiverName = caregivingRound.caregiverInfo?.name ?: "-".replace("\\r\\n|\\r|\\n|\\n\\r".toRegex(),"").replace(",", "/"),
+                managerOrganizationName = managerOrganizationName.replace("\\r\\n|\\r|\\n|\\n\\r".toRegex(),"").replace(",", "/"),
             )
         )
 
