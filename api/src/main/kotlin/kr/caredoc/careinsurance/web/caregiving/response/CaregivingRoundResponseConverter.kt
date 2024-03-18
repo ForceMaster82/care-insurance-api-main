@@ -38,12 +38,20 @@ object CaregivingRoundResponseConverter {
                 insuranceNumber = reception.insuranceInfo.insuranceNumber,
                 accidentNumber = reception.accidentInfo.accidentNumber,
                 patientName = reception.patientInfo.name.masked,
+                patientNickName = reception.patientInfo.nickname,
+                patientAge = reception.patientInfo.age,
+                patientSex = reception.patientInfo.sex,
+                patientPrimaryPhoneNumber = reception.patientInfo.primaryContact.maskedPhoneNumber,
+                hospitalAndRoom = reception.accidentInfo.hospitalAndRoomInfo.hospitalAndRoom,		//병원
+                patientDescription = reception.accidentInfo.patientDescription,		//환자상태
+                receivedDateTime = reception.receivedDateTime,		//접수일
+                //coverageId = insuranceInfo.coverageId,				//가입담보
                 expectedCaregivingStartDate = reception.expectedCaregivingStartDate,
                 receptionProgressingStatus = reception.progressingStatus,
                 caregivingManagerInfo = DetailCaregivingRoundResponse.CaregivingManagerInfo(
                     organizationType = caregivingRound.receptionInfo.caregivingManagerInfo.organizationType,
                     organizationId = caregivingRound.receptionInfo.caregivingManagerInfo.organizationId,
-                    managingUserId = caregivingRound.receptionInfo.caregivingManagerInfo.managingUserId
+                    managingUserId = caregivingRound.receptionInfo.caregivingManagerInfo.managingUserId,
                 )
             ),
             remarks = caregivingRound.remarks,
@@ -54,6 +62,9 @@ object CaregivingRoundResponseConverter {
         id = caregivingRound.id,
         caregivingRoundNumber = caregivingRound.caregivingRoundNumber,
         caregiverName = caregivingRound.caregivingStateData.caregiverInfo?.name,
+        caregiverPhoneNumber = caregivingRound.caregivingStateData.caregiverInfo?.phoneNumber.toString(),
+        caregiverSex = caregivingRound.caregivingStateData.caregiverInfo?.sex.toString(),
+        caregiverBirthDate = caregivingRound.caregivingStateData.caregiverInfo?.birthDate,
         startDateTime = caregivingRound.startDateTime?.intoUtcOffsetDateTime(),
         endDateTime = caregivingRound.endDateTime?.intoUtcOffsetDateTime(),
         caregivingProgressingStatus = caregivingRound.caregivingProgressingStatus,
@@ -64,6 +75,14 @@ object CaregivingRoundResponseConverter {
             insuranceNumber = caregivingRound.receptionInfo.insuranceNumber,
             accidentNumber = caregivingRound.receptionInfo.accidentNumber,
             patientName = reception.patientInfo.name.masked,
+            patientNickName = reception.patientInfo.nickname,
+            patientAge = reception.patientInfo.age,
+            patientSex = reception.patientInfo.sex,
+            patientPrimaryPhoneNumber = reception.patientInfo.primaryContact.maskedPhoneNumber,
+            hospitalAndRoom = reception.accidentInfo.hospitalAndRoomInfo.hospitalAndRoom,		//병원
+            patientDescription = reception.accidentInfo.patientDescription,		//환자상태
+            receivedDateTime = reception.receivedDateTime,		//접수일
+            //coverageId = insuranceInfo.coverageId,				//가입담보
             expectedCaregivingStartDate = caregivingRound.receptionInfo.expectedCaregivingStartDate,
             receptionProgressingStatus = caregivingRound.receptionInfo.receptionProgressingStatus,
             caregivingManagerInfo = SimpleCaregivingRoundResponse.CaregivingManagerInfo(
