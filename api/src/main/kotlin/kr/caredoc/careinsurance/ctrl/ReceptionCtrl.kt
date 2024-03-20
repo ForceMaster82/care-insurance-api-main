@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/v1/reception")
+@RequestMapping("/api/v2/reception")
 class ReceptionCtrl(
     private val receptionSvc: ReceptionSvc,
 ) {

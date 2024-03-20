@@ -8,14 +8,14 @@ import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/v1/settlement")
+@RequestMapping("/api/v2/settlement")
 class SettlementCtrl(
     private val receptionSvc: ReceptionSvc,
 ) {
     private val logger: Logger = LoggerFactory.getLogger(SettlementCtrl::class.java)
 
     @ResponseBody
-    @GetMapping("sendCalculate")
+    @GetMapping("/sendCalculate")
     @Throws(Exception::class)
     fun sendCalculate(
         req: HttpServletRequest,

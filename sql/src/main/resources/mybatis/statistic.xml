@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="caredoc.statistic">
+
+	<select id="listSettlementExcel" parameterType="string" resultType="hashmap">
+		SELECT eco.name
+		, CAST(r.received_date_time as date) as received_date_time
+		, r.accident_number
+		, bba.daily_caregiving_charge
+		, cr.masked_patient_name
+		, cr.caregiver_name
+		, cr.daily_caregiving_charge
+		, cr.start_date_time
+		, cr.end_date_time
+		, cr.caregiving_round_number
+		, b.total_amount
+		, cc.expected_settlement_date
+		, cc.total_amount
+		, dcrbts.`date`
+		, dcrbts.total_deposit_amount
+		, dcrbts.total_withdrawal_amount
+		, cc.covid19_testing_cost
+		, cc.meal_cost
+		, cc.transportation_fee
+		, cc.holiday_charge
+		, cc.additional_hours_charge
+		, caec.amount
+		, cc.additional_amount
+		, b.additional_hours
+		, b.additional_amount
+		FROM reception r
+		JOIN caregiving_round cr  on r.id = cr.reception_id
+		LEFT JOIN external_caregiving_organization eco on cr.caregiver_organization_id = eco.id
+		LEFT JOIN caregiving_charge cc  on cr.id = cc.caregiving_round_id
+		LEFT JOIN caregiving_additional_etc_charge caec on caec.caregiving_charge_id = cc.id
+		LEFT JOIN billing b on cr.id = b.caregiving_round_id
+		LEFT JOIN billing_basic_amounts bba on b.id = bba.billing_id
+		LEFT JOIN daily_caregiving_round_billing_transaction_statistics dcrbts on dcrbts.caregiving_round_id  = cr.id
+		WHERE cc.expected_settlement_date <![CDATA[>=]]> #{from}
+		AND cc.expected_settlement_date <![CDATA[<=]]> #{until}
+		AND cr.end_date_time  is not null
+		ORDER BY r.received_date_time, r.accident_number, cr.caregiving_round_number
+	</select>
+
+</mapper>

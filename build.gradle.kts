@@ -98,6 +98,8 @@ allprojects {
         implementation("ch.qos.logback.contrib:logback-json-classic:0.1.5")
 
         implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1")
+        implementation("org.apache.poi:poi:4.1.2")
+        implementation("org.apache.poi:poi-ooxml:4.1.2")
 
         runtimeOnly("com.h2database:h2")
         runtimeOnly("com.mysql:mysql-connector-j")
