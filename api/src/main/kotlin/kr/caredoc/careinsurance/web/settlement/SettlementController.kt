@@ -1,10 +1,12 @@
 package kr.caredoc.careinsurance.web.settlement
 
 import kr.caredoc.careinsurance.Clock
+import kr.caredoc.careinsurance.ctrl.ReceptionCtrl
 import kr.caredoc.careinsurance.patch.Patches
 import kr.caredoc.careinsurance.reception.ReceptionsByIdsQuery
 import kr.caredoc.careinsurance.reception.ReceptionsByIdsQueryHandler
 import kr.caredoc.careinsurance.reception.ReferenceReceptionNotExistsException
+import kr.caredoc.careinsurance.reception.statistics.DailyReceptionStatistics
 import kr.caredoc.careinsurance.security.accesscontrol.Subject
 import kr.caredoc.careinsurance.settlement.DateRange
 import kr.caredoc.careinsurance.settlement.InvalidSettlementProgressingStatusTransitionException
@@ -25,6 +27,8 @@ import kr.caredoc.careinsurance.web.settlement.request.IdentifiedSettlementEditi
 import kr.caredoc.careinsurance.web.settlement.response.InvalidSettlementProgressingStatusTransitionData
 import kr.caredoc.careinsurance.web.settlement.response.SettlementResponse
 import kr.caredoc.careinsurance.web.settlement.response.SettlementResponseConverter
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -45,6 +49,8 @@ class SettlementController(
     private val settlementEditingCommandHandler: SettlementEditingCommandHandler,
     private val receptionsByIdsQueryHandler: ReceptionsByIdsQueryHandler,
 ) {
+    private val logger: Logger = LoggerFactory.getLogger(SettlementController::class.java)
+
     private val queryParser = QueryParser(
         mapOf(
             "accidentNumber" to SettlementsSearchQuery.SearchingProperty.ACCIDENT_NUMBER,
@@ -179,7 +185,8 @@ class SettlementController(
         @RequestBody payload: List<IdentifiedSettlementEditingRequest>,
         subject: Subject,
     ): ResponseEntity<Unit> {
-        settlementEditingCommandHandler.editSettlements(
+        logger.debug("subject : {}", subject)
+        /*settlementEditingCommandHandler.editSettlements(
             payload.map {
                 SettlementByIdQuery(
                     settlementId = it.id,
@@ -190,7 +197,71 @@ class SettlementController(
                     subject = subject,
                 )
             }
+        )*/
+        return ResponseEntity.noContent().build()
+    }
+
+    /**
+     * 정산 처리 2024-03-20.
+     */
+    @GetMapping("sendCalculate")
+    fun sendCalculate(
+        @RequestParam("from") expectedSettlementDateFrom: LocalDate?,
+        @RequestParam("until") expectedSettlementDateUntil: LocalDate?,
+        @RequestParam("progressing-status") progressingStatus: SettlementProgressingStatus,
+        @RequestParam("settlementManagerId") settlementManagerId: String?,
+        @RequestParam("query") query: String?,
+        @RequestParam("sort", defaultValue = "EXPECTED_SETTLEMENT_DATE_DESC_ACCIDENT_NUMBER_DESC") sort: SettlementsSearchQuery.Sorting,
+        subject: Subject,
+    ): ResponseEntity<Unit> {
+        logger.debug("sendCalculate subject : {}", subject)
+        val expectedSettlementDateRange =
+            if (expectedSettlementDateFrom != null && expectedSettlementDateUntil != null) {
+                DateRange(
+                    from = expectedSettlementDateFrom,
+                    until = expectedSettlementDateUntil,
+                )
+            } else {
+                null
+            }
+        if (expectedSettlementDateRange == null) {
+            throw ReferenceDatePeriodNoDataException()
+        }
+
+        val stcList = settlementsSearchQueryHandler.getSettlementsCalculate(
+            query = SettlementsSearchQuery(
+                progressingStatus = progressingStatus,
+                expectedSettlementDate = expectedSettlementDateRange,
+                searchCondition = query?.let { queryParser.parse(it) },
+                sorting = sort,
+                subject = subject,
+            ),
         )
+
+        var reqList: MutableList<IdentifiedSettlementEditingRequest> = arrayListOf()
+        stcList.forEach{
+            reqList.add(
+                IdentifiedSettlementEditingRequest(
+                    id = it.id,
+                    settlementManagerId = settlementManagerId.toString(),
+                    progressingStatus = SettlementProgressingStatus.COMPLETED
+                )
+            )
+        }
+
+        settlementEditingCommandHandler.editSettlements(
+            reqList.map {
+                SettlementByIdQuery(
+                    settlementId = it.id,
+                    subject = subject,
+                ) to SettlementEditingCommand(
+                    progressingStatus = Patches.ofValue(it.progressingStatus),
+                    settlementManagerId = Patches.ofValue(it.settlementManagerId?:""),
+                    subject = subject,
+                )
+            }
+        )
+
         return ResponseEntity.noContent().build()
     }
 

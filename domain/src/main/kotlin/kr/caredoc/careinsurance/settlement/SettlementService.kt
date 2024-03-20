@@ -208,6 +208,30 @@ class SettlementService(
         return csvWriter.writeCsv()
     }
 
+    @Transactional(readOnly = true)
+    override fun getSettlementsCalculate(query: SettlementsSearchQuery): List<Settlement> {
+        val settlements = settlementRepository.searchSettlements(
+            SettlementSearchingRepository.SearchingCriteria(
+                progressingStatus = query.progressingStatus,
+                accidentNumber = query.getKeyword(
+                    propertyToExtractionKeyword = SettlementsSearchQuery.SearchingProperty.ACCIDENT_NUMBER
+                ),
+                patientName = query.getKeyword(
+                    propertyToExtractionKeyword = SettlementsSearchQuery.SearchingProperty.PATIENT_NAME
+                ),
+                organizationName = query.getKeyword(
+                    propertyToExtractionKeyword = SettlementsSearchQuery.SearchingProperty.ORGANIZATION_NAME
+                ),
+                expectedSettlementDate = query.expectedSettlementDate,
+            ),
+            orderBy(query.sorting)
+        )
+
+        SettlementAccessPolicy.checkAll(query.subject, ReadOneAccess, settlements)
+
+        return settlements
+    }
+
     private class SettlementCsvWriter {
         private data class SettlementCsvRecordData(
             val bank: String,

@@ -13,6 +13,9 @@
 	<select id="list" parameterType="string" resultType="hashmap">
 		select *
 		from reception
+		<where>
+			id = #{receptionId}
+		</where>
 	</select>
 
 </mapper>

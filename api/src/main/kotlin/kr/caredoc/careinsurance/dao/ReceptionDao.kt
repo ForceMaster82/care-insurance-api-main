@@ -15,6 +15,6 @@ class ReceptionDao(
     }
 
     fun list(svcMap: Map<String, Any>): List<Map<String, Any>> {
-        return sqlSession.selectOne("caredoc.reception.list", svcMap)
+        return sqlSession.selectList("caredoc.reception.list", svcMap)
     }
 }
