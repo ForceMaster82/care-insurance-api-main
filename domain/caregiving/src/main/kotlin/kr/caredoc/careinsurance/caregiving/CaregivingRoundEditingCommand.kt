@@ -6,6 +6,7 @@ import kr.caredoc.careinsurance.security.accesscontrol.Action
 import kr.caredoc.careinsurance.security.accesscontrol.ActionAttribute
 import kr.caredoc.careinsurance.security.accesscontrol.ActionType
 import kr.caredoc.careinsurance.security.accesscontrol.Subject
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 data class CaregivingRoundEditingCommand(
@@ -16,6 +17,7 @@ data class CaregivingRoundEditingCommand(
     val caregivingRoundClosingReasonDetail: String?,
     val caregiverInfo: CaregiverInfo?,
     val remarks: String,
+    val expectedSettlementDate: LocalDate?,
     val subject: Subject,
 ) : Action {
 

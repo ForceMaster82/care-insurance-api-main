@@ -15,6 +15,7 @@ data class CaregivingRoundEditingRequest(
         val caregivingRoundClosingReasonDetail: String?,
         val caregiverInfo: CaregiverInfo? = null,
         val remarks: String,
+        val expectedSettlementDate: LocalDate?,
 ) {
     data class CaregiverInfo(
         val caregiverOrganizationId: String?,

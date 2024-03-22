@@ -26,6 +26,7 @@ data class DetailCaregivingRoundResponse(
     val caregiverInfo: CaregiverInfo?,
     val receptionInfo: ReceptionInfo,
     val remarks: String,
+    val expectedSettlementDate: LocalDate?,
 ) {
     data class CaregiverInfo(
         val caregiverOrganizationId: String?,

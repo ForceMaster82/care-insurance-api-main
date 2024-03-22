@@ -195,6 +195,9 @@ class CaregivingRound protected constructor(
     var remarks: String = ""
         protected set
 
+    var expectedSettlementDate: LocalDate? = null
+        protected set
+
     @Column(insertable=false, updatable=false)
     var receptionId: String? = ""
         protected set
@@ -385,6 +388,16 @@ class CaregivingRound protected constructor(
         this.remarks = remarks
     }
 
+    fun updateExpectedSettlementDate(expectedSettlementDate: LocalDate?, subject: Subject) = trackModification(subject = subject) {
+        CaregivingRoundAccessPolicy.check(subject, ModifyingAccess, this)
+
+        if (this.expectedSettlementDate == expectedSettlementDate) {
+            return@trackModification
+        }
+
+        this.expectedSettlementDate = expectedSettlementDate
+    }
+
     private fun generateNextRoundWith(stateData: CaregivingStateData) = CaregivingRound(
         id = ULID.random(),
         caregivingRoundNumber = this.caregivingRoundNumber + 1,
@@ -440,6 +453,7 @@ class CaregivingRound protected constructor(
             startDateTime = status.startDateTime,
             endDateTime = status.endDateTime,
             remarks = remarks,
+            expectedSettlementDate = status.expectedSettlementDate,
             isLastCaregivingRound = endDateTime != null && caregivingProgressingStatus.isCompletedStatus && caregivingRoundClosingReasonType == ClosingReasonType.FINISHED
         )
 
@@ -478,6 +492,10 @@ class CaregivingRound protected constructor(
             remarks = Modification(
                 previous.remarks,
                 current.remarks,
+            ),
+            expectedSettlementDate = Modification(
+                previous.expectedSettlementDate,
+                current.expectedSettlementDate,
             ),
             cause = cause,
             editingSubject = subject,
@@ -546,6 +564,7 @@ class CaregivingRound protected constructor(
         val startDateTime: LocalDateTime?,
         val endDateTime: LocalDateTime?,
         val remarks: String,
+        val expectedSettlementDate: LocalDate?,
         val isLastCaregivingRound: Boolean,
     )
 

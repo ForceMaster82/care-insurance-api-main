@@ -132,6 +132,10 @@ class CaregivingRoundModificationHistoryService(
             CaregivingRoundModificationHistory.ModifiedProperty.REMARKS,
             event.remarks.map { it },
         )
+        addModificationHistoryIfChanged(
+                CaregivingRoundModificationHistory.ModifiedProperty.EXPECTED_SETTLEMENT_DATE,
+                event.expectedSettlementDate.map { it?.toString() },
+        )
 
         if (modificationHistoryRecords.isNotEmpty()) {
             caregivingRoundModificationSummaryRepository.findTopByReceptionId(event.receptionId)

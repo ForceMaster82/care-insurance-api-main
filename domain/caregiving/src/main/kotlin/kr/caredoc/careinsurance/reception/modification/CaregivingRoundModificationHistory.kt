@@ -39,5 +39,6 @@ class CaregivingRoundModificationHistory(
         START_DATE_TIME(type = DynamicType.DATETIME),
         END_DATE_TIME(type = DynamicType.DATETIME),
         REMARKS(type = DynamicType.STRING),
+        EXPECTED_SETTLEMENT_DATE(type = DynamicType.DATE),
     }
 }

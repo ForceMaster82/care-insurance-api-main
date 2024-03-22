@@ -55,6 +55,7 @@ object CaregivingRoundResponseConverter {
                 )
             ),
             remarks = caregivingRound.remarks,
+            expectedSettlementDate = caregivingRound.expectedSettlementDate,
         )
     }
 

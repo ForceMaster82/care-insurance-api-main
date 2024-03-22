@@ -5,6 +5,7 @@ import kr.caredoc.careinsurance.billing.BillingProgressingStatus
 import kr.caredoc.careinsurance.modification.Modification
 import kr.caredoc.careinsurance.security.accesscontrol.Subject
 import kr.caredoc.careinsurance.settlement.SettlementProgressingStatus
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 data class CaregivingRoundModified(
@@ -18,6 +19,7 @@ data class CaregivingRoundModified(
     val startDateTime: Modification<LocalDateTime?>,
     val endDateTime: Modification<LocalDateTime?>,
     val remarks: Modification<String>,
+    val expectedSettlementDate: Modification<LocalDate?>,
     val cause: Cause,
     val editingSubject: Subject,
 ) {

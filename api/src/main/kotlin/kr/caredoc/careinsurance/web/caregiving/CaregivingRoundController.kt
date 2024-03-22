@@ -254,6 +254,7 @@ class CaregivingRoundController(
             )
         },
         remarks = this.remarks,
+        expectedSettlementDate = this.expectedSettlementDate,
         subject = subject,
     )
 

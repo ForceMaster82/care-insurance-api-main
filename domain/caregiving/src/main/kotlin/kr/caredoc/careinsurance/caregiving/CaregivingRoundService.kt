@@ -274,6 +274,7 @@ class CaregivingRoundService(
         command.startDateTime?.run { caregivingRound.editCaregivingStartDateTime(this, subject) }
         command.endDateTime?.run { caregivingRound.editCaregivingEndDateTime(command.endDateTime, subject) }
         caregivingRound.updateRemarks(command.remarks, subject)
+        caregivingRound.updateExpectedSettlementDate(command.expectedSettlementDate, subject)
         caregivingRoundRepository.save(caregivingRound)
     }
 
