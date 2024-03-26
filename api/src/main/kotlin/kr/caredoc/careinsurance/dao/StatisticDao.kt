@@ -13,4 +13,9 @@ class StatisticDao(
     fun listSettlementExcel(svcMap: Map<String, Any>): List<Map<String, Any>> {
         return sqlSession.selectList("caredoc.statistic.listSettlementExcel", svcMap)
     }
+
+    fun listBillingExcel(svcMap: Map<String, Any>): List<Map<String, Any>> {
+        return sqlSession.selectList("caredoc.statistic.listBillingExcel", svcMap)
+    }
+
 }

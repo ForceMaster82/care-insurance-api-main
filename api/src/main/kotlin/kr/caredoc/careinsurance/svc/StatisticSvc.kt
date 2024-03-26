@@ -13,4 +13,8 @@ class StatisticSvc(
     fun listSettlementExcel(svcMap:Map<String, Any>): List<Map<String, Any>> {
         return statisticDao.listSettlementExcel(svcMap)
     }
+
+    fun listBillingExcel(svcMap:Map<String, Any>): List<Map<String, Any>> {
+        return statisticDao.listBillingExcel(svcMap)
+    }
 }

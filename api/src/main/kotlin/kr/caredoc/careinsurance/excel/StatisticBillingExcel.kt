@@ -8,14 +8,14 @@ import org.springframework.web.servlet.view.document.AbstractXlsxView
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
-class StatisticSettlementExcel: AbstractXlsxView() {
+class StatisticBillingExcel: AbstractXlsxView() {
     override fun buildExcelDocument(
         model: MutableMap<String, Any>,
         workbook: Workbook,
         request: HttpServletRequest,
         response: HttpServletResponse
     ) {
-        val filename = URLEncoder.encode("기간별_월마감_조회예정일자.xlsx", StandardCharsets.UTF_8)
+        val filename = URLEncoder.encode("기간별_월마감_조회_청구입출금일자.xlsx", StandardCharsets.UTF_8)
         response.setHeader("Content-Disposition", "attachment; filename=\"$filename\";")
 
         val list = model.get("data") as List<MutableMap<String, Any>>
