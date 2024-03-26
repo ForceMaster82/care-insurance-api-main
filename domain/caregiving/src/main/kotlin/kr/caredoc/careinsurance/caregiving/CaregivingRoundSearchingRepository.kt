@@ -33,6 +33,7 @@ interface CaregivingRoundSearchingRepository {
         val receptionReceivedDateFrom: LocalDate,
         val patientPhoneNumberContains: String? = null,
         val hospitalAndRoom: String? = null,
-        val notifyCaregivingProgress: Boolean? = true
+        val notifyCaregivingProgress: Boolean? = true,
+        val expectedSettlementDate: LocalDate?,
     )
 }

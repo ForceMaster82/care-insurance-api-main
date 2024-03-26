@@ -107,6 +107,7 @@ class CaregivingRoundSearchingRepositoryImpl(
                 generateBillingProgressingStatusPredicate(root, billingProgressingStatuses),
                 generateReceptionReceivedDateTimePredicate(query, root, receptionReceivedDateFrom.atTime(0, 0, 0)),
                 generateNotifyPredicate(query,root, notifyCaregivingProgress),
+                generateExpectedSettlementDatePredicate(root, expectedSettlementDate),
             )
         }
     }
@@ -375,6 +376,16 @@ class CaregivingRoundSearchingRepositoryImpl(
         return root.get<CaregivingRound.ReceptionInfo>(CaregivingRound::receptionInfo.name)
                 .get<String>(CaregivingRound.ReceptionInfo::receptionId.name)
                 .`in`(receptionIdSubQuery)
+    }
+
+    private fun generateExpectedSettlementDatePredicate(
+            root: Root<CaregivingRound>,
+            expectedSettlementDate: LocalDate?,
+    ) = expectedSettlementDate?.let {
+        criteriaBuilder.equal(
+                root.get<LocalDate>(CaregivingRound::expectedSettlementDate.name),
+                expectedSettlementDate
+        )
     }
 
 }

@@ -23,6 +23,7 @@ data class CaregivingRoundsByFilterQuery(
     val searchCondition: SearchCondition<SearchingProperty>?,
     val subject: Subject,
     val notifyCaregivingProgress: Boolean?,
+    val expectedSettlementDate: LocalDate?,
 ) : Action {
 
     override fun get(attribute: ActionAttribute) = when (attribute) {

@@ -204,6 +204,7 @@ class CaregivingRoundService(
                 propertyToExtractionKeyword = CaregivingRoundsByFilterQuery.SearchingProperty.PATIENT_PHONE_NUMBER
             ),
             notifyCaregivingProgress = this.notifyCaregivingProgress,
+            expectedSettlementDate = this.expectedSettlementDate
         )
 
     private fun CaregivingRoundsByFilterQuery.getKeyword(

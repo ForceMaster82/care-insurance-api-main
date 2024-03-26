@@ -64,6 +64,7 @@ class OrganizationCaregivingRoundController(
         @RequestParam("billing-progressing-status", defaultValue = "") billingStatuses: Set<BillingProgressingStatus>,
         @RequestParam("query", required = false) query: String?,
         @RequestParam("notify", required = false) notifyCaregivingProgress: Boolean?,
+        @RequestParam("expected_settlement_date", required = true) expectedSettlementDate: LocalDate?,
         subject: Subject,
     ): ResponseEntity<PagedResponse<SimpleCaregivingRoundResponse>> {
         val caregivingRounds = caregivingRoundsByFilterQueryHandler.getCaregivingRounds(
@@ -79,6 +80,7 @@ class OrganizationCaregivingRoundController(
                 searchCondition = query?.let { queryParser.parse(it) },
                 subject = subject,
                 notifyCaregivingProgress = notifyCaregivingProgress,
+                expectedSettlementDate = expectedSettlementDate,
             ),
             pageRequest = pagingRequest.intoPageable(),
         )
@@ -124,6 +126,7 @@ class OrganizationCaregivingRoundController(
         @RequestParam("billing-progressing-status", defaultValue = "") billingStatuses: Set<BillingProgressingStatus>,
         @RequestParam("query", required = false) query: String?,
         @RequestParam("notify", required = false) notifyCaregivingProgress: Boolean?,
+        @RequestParam("expected_settlement_date", required = true) expectedSettlementDate: LocalDate?,
         subject: Subject,
     ): ResponseEntity<ByteArray> {
         val caregivingRounds = caregivingRoundsByFilterQueryHandler.getCaregivingRoundsAsCsv(
@@ -139,6 +142,7 @@ class OrganizationCaregivingRoundController(
                 searchCondition = query?.let { queryParser.parse(it) },
                 subject = subject,
                 notifyCaregivingProgress = notifyCaregivingProgress,
+                expectedSettlementDate = expectedSettlementDate
             )
         )
 
