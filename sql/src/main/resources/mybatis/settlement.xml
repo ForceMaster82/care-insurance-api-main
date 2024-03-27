@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="caredoc.settlement">
+
+	<select id="cntTransaction" parameterType="string" resultType="int">
+		select count(*)
+		from
+			settlement_transaction a
+			left join settlement b on a.settlement_id = b.id
+			left join reception c on b.reception_id = c.id
+			left join caregiving_round d on b.caregiving_round_id = d.id
+		<where>
+			a.transaction_date <![CDATA[>=]]> #{transaction-date-from}
+			and a.transaction_date <![CDATA[<=]]> #{transaction-date-until}
+			<if test=" accidentNumber != null and accidentNumber != '' ">AND b.accident_number like concat('%', #{accidentNumber}, '%')</if>
+			<if test=" patientName != null and patientName != '' ">AND c.hashed_patient_name = #{patientName}</if>
+			<if test=" caregiverName != null and caregiverName != '' ">AND d.caregiver_name like concat('%', #{caregiverName}, '%')</if>
+		</where>
+	</select>
+
+	<select id="listTransaction" parameterType="string" resultType="hashmap">
+		select
+		    b.accident_number as accidentNumber,
+		    c.masked_patient_name as patientName,
+			b.caregiving_round_number as caregivingRoundNumber,
+			a.transaction_type as transactionType,
+			a.amount as basicAmount,
+			a.transaction_date as lastTransactionDateTime,
+			b.reception_id as receptionId
+		from
+		    settlement_transaction a
+			left join settlement b on a.settlement_id = b.id
+			left join reception c on b.reception_id = c.id
+		<where>
+			a.transaction_date <![CDATA[>=]]> #{transaction-date-from}
+			and a.transaction_date <![CDATA[<=]]> #{transaction-date-until}
+			<if test=" accidentNumber != null and accidentNumber != '' ">AND b.accident_number like concat('%', #{accidentNumber}, '%')</if>
+			<if test=" patientName != null and patientName != '' ">AND c.hashed_patient_name = #{patientName}</if>
+			<if test=" caregiverName != null and caregiverName != '' ">AND d.caregiver_name like concat('%', #{caregiverName}, '%')</if>
+		</where>
+		order by a.transaction_date desc
+		<if test="r_startrow != null and r_startrow != '' and r_endrow != null and r_endrow != ''">
+			LIMIT ${r_startrow - 1}, ${r_endrow - r_startrow + 1}
+		</if>
+	</select>
+</mapper>

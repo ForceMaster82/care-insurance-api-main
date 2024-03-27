@@ -38,7 +38,7 @@ class CoverageService(
     override fun createCoverage(command: CoverageCreationCommand): CoverageCreationResult {
         CoverageAccessPolicy.check(command.subject, command, Object.Empty)
 
-        ensureRenewalTypeIsLegalForCreation(command.renewalType)
+        //ensureRenewalTypeIsLegalForCreation(command.renewalType)      // 3년형 오류 주석처리
         ensureNameNotDuplicated(command.name)
         ensureRenewalTypeAndSubscriptionYearNotDuplicated(command.renewalType, command.targetSubscriptionYear)
 

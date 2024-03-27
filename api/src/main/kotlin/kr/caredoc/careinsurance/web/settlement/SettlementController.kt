@@ -186,7 +186,7 @@ class SettlementController(
         subject: Subject,
     ): ResponseEntity<Unit> {
         logger.debug("subject : {}", subject)
-        /*settlementEditingCommandHandler.editSettlements(
+        settlementEditingCommandHandler.editSettlements(
             payload.map {
                 SettlementByIdQuery(
                     settlementId = it.id,
@@ -197,7 +197,7 @@ class SettlementController(
                     subject = subject,
                 )
             }
-        )*/
+        )
         return ResponseEntity.noContent().build()
     }
 
